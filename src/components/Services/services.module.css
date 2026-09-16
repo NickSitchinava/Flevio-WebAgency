@@ -103,18 +103,27 @@
   flex-wrap: wrap;
 }
 
-.cardLabel {
+.cardTag {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-body);
   font-size: 0.72rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.08em;
-  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid;
 }
 
 .learnMoreFrame {
   display: inline-flex;
   align-items: center;
   max-width: 100%;
+}
+
+.borderPaused {
+  animation-play-state: paused !important;
 }
 
 .learnMore {
@@ -247,5 +256,47 @@
   .title {
     font-size: clamp(1.1rem, 5.6vw, 1.75rem);
     letter-spacing: -0.01em;
+  }
+}
+
+@media (max-width: 900px) {
+  .services :global([data-flow-section]) {
+    min-height: 100dvh;
+  }
+
+  .services :global(.flow-art-container) {
+    min-height: 100dvh;
+  }
+
+  .composition {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}
+
+@media (max-width: 480px) {
+  .cascadeWrap {
+    text-overflow: ellipsis;
+  }
+
+  .cardTag {
+    font-size: 0.66rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .cardHeader {
+    row-gap: 0.6rem;
+  }
+
+  .composition {
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+}
+
+@media (max-width: 380px) {
+  .composition {
+    padding-left: max(1.1rem, env(safe-area-inset-left));
+    padding-right: max(1.1rem, env(safe-area-inset-right));
   }
 }

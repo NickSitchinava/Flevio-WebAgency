@@ -8,6 +8,8 @@ import { locales, defaultLocale, type Locale } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import styles from "./service-detail.module.css";
 
+const SITE_URL = "https://nicksitchinava.dev";
+
 function resolveLocale(value: string): Locale {
   return locales.includes(value as Locale) ? (value as Locale) : defaultLocale;
 }
@@ -34,9 +36,27 @@ export async function generateMetadata({
     return {};
   }
 
+  const canonicalUrl = `${SITE_URL}/${locale}/services/${slug}`;
+
   return {
-    title: `${service.title} | Nick Sitchinava`,
+    title: `${service.title} | Flevio`,
     description: service.description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        ...Object.fromEntries(
+          locales.map((l) => [l, `${SITE_URL}/${l}/services/${slug}`])
+        ),
+        "x-default": `${SITE_URL}/${defaultLocale}/services/${slug}`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: canonicalUrl,
+      title: `${service.title} | Flevio`,
+      description: service.description,
+      locale: locale === "ka" ? "ka_GE" : "en_US",
+    },
   };
 }
 
@@ -54,9 +74,27 @@ export default async function ServiceDetailPage({
     notFound();
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.description,
+    provider: {
+      "@type": "ProfessionalService",
+      name: "Flevio",
+      url: `${SITE_URL}/${locale}`,
+    },
+    areaServed: ["Georgia", "Worldwide"],
+    url: `${SITE_URL}/${locale}/services/${slug}`,
+  };
+
   return (
     <>
       <Header locale={locale} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <main className={styles.main}>
         <div className={styles.inner}>
           <Link href={`/${locale}#services`} className={styles.back}>
@@ -86,10 +124,10 @@ export default async function ServiceDetailPage({
               href={`/${locale}#contact`}
               style={
                 {
-                  "--btn-bg": "oklch(55% 0.18 290)",
-                  "--btn-fg": "#fff",
-                  "--btn-fill": "oklch(30% 0.14 290)",
-                  "--btn-fill-fg": "#fff",
+                  "--btn-bg": "var(--color-accent)",
+                  "--btn-fg": "#ffffff",
+                  "--btn-fill": "#111111",
+                  "--btn-fill-fg": "#ffffff",
                 } as React.CSSProperties
               }
             >

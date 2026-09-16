@@ -1,13 +1,27 @@
 "use client";
 
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { ArrowUpRight, Check, Code2, Layout, TrendingUp, type LucideIcon } from "lucide-react";
 import { BorderRotate } from "@/components/ui/animated-gradient-border";
 import type { ServiceItem } from "@/i18n/dictionaries";
+import type { Locale } from "@/i18n/config";
 import { useServicesCursor } from "./ServicesCursor";
 import styles from "./services.module.css";
 
 const serviceIcons: LucideIcon[] = [Code2, Layout, TrendingUp];
+
+const serviceTags: Record<Locale, string[]> = {
+  en: ["Build", "Convert", "Rank"],
+  ka: ["აშენება", "კონვერტაცია", "რანჟირება"],
+};
 
 export interface ServiceCardTheme {
   stageBg: string;
@@ -17,6 +31,7 @@ export interface ServiceCardTheme {
   cardBg: string;
   cardInk: string;
   borderColors: { primary: string; secondary: string; accent: string };
+  accentOnStage: string;
 }
 
 const stagger = {
@@ -50,13 +65,17 @@ function CascadeChars({ text }: { text: string }) {
 function LearnMoreButton({
   href,
   label,
+  serviceName,
   theme,
   locale,
+  animateBorder,
 }: {
   href: string;
   label: string;
+  serviceName: string;
   theme: ServiceCardTheme;
-  locale: string;
+  locale: Locale;
+  animateBorder: boolean;
 }) {
   const cursor = useServicesCursor();
   const prefersReducedMotion = useReducedMotion();
@@ -87,11 +106,12 @@ function LearnMoreButton({
       backgroundColor={theme.cardBg}
       borderWidth={1.5}
       borderRadius={999}
-      className={styles.learnMoreFrame}
+      className={`${styles.learnMoreFrame} ${animateBorder ? "" : styles.borderPaused}`}
     >
       <motion.a
         href={href}
         lang={locale}
+        aria-label={`${label}: ${serviceName}`}
         className={styles.learnMore}
         style={{
           x: springX,
@@ -122,19 +142,61 @@ export function ServiceCard({
   locale,
   theme,
   learnMoreLabel,
+  featuresFirst = false,
 }: {
   service: ServiceItem;
   index: number;
-  locale: string;
+  locale: Locale;
   theme: ServiceCardTheme;
   learnMoreLabel: string;
+  featuresFirst?: boolean;
 }) {
   const Icon = serviceIcons[index % serviceIcons.length];
+  const cursor = useServicesCursor();
+  const tag = serviceTags[locale]?.[index % 3] ?? serviceTags.en[index % 3];
+  const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "200px" }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "start 55%"],
+  });
+  const revealOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const revealY = useTransform(scrollYProgress, [0, 1], [24, 0]);
 
   return (
-    <div className={styles.composition}>
+    <motion.div
+      ref={sectionRef}
+      className={styles.composition}
+      onPointerEnter={() => cursor?.setHovered(true)}
+      onPointerLeave={() => cursor?.setHovered(false)}
+      style={
+        prefersReducedMotion
+          ? undefined
+          : { opacity: revealOpacity, y: revealY }
+      }
+    >
       <div className={styles.backLayer}>
-        <span className={styles.iconBadge} aria-hidden="true">
+        <span
+          className={styles.iconBadge}
+          style={{ color: theme.accentOnStage }}
+          aria-hidden="true"
+        >
           <Icon size={26} strokeWidth={1.5} />
         </span>
         <h3 className={styles.title} itemProp="name" lang={locale}>
@@ -144,18 +206,54 @@ export function ServiceCard({
         </h3>
       </div>
 
-      <div className={styles.content} style={{ borderColor: theme.borderColors.primary }}>
+      <div
+        className={styles.content}
+        style={{ borderColor: `color-mix(in oklch, ${theme.accentOnStage} 32%, ${theme.borderColors.primary})` }}
+      >
         <div className={styles.cardHeader}>
-          <span className={styles.cardLabel} style={{ color: theme.stageInkFaint }}>
-            {String(index + 1).padStart(2, "0")}
+          <span
+            className={styles.cardTag}
+            style={{
+              color: theme.accentOnStage,
+              borderColor: `color-mix(in oklch, ${theme.accentOnStage} 45%, transparent)`,
+            }}
+            lang={locale}
+          >
+            {tag}
           </span>
           <LearnMoreButton
             href={`/${locale}/services/${service.slug}`}
             label={learnMoreLabel}
+            serviceName={service.title}
             theme={theme}
             locale={locale}
+            animateBorder={inView && !prefersReducedMotion}
           />
         </div>
+
+        {featuresFirst && (
+          <motion.ul
+            className={styles.cardFeatures}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={stagger}
+            lang={locale}
+          >
+            {service.features.map((feature) => (
+              <motion.li
+                key={feature}
+                className={styles.cardFeatureItem}
+                style={{ color: theme.stageInkMuted }}
+                variants={featureRow}
+                transition={{ duration: 0.5, ease: EASE }}
+              >
+                <Check size={14} strokeWidth={2.25} style={{ color: theme.accentOnStage }} />
+                <span>{feature}</span>
+              </motion.li>
+            ))}
+          </motion.ul>
+        )}
 
         <p className={styles.cardText} style={{ color: theme.stageInk }} lang={locale}>
           {service.description}
@@ -164,28 +262,30 @@ export function ServiceCard({
           {service.details}
         </p>
 
-        <motion.ul
-          className={styles.cardFeatures}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={stagger}
-          lang={locale}
-        >
-          {service.features.map((feature) => (
-            <motion.li
-              key={feature}
-              className={styles.cardFeatureItem}
-              style={{ color: theme.stageInkMuted }}
-              variants={featureRow}
-              transition={{ duration: 0.5, ease: EASE }}
-            >
-              <Check size={14} strokeWidth={2.25} style={{ color: theme.stageInkFaint }} />
-              <span>{feature}</span>
-            </motion.li>
-          ))}
-        </motion.ul>
+        {!featuresFirst && (
+          <motion.ul
+            className={styles.cardFeatures}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={stagger}
+            lang={locale}
+          >
+            {service.features.map((feature) => (
+              <motion.li
+                key={feature}
+                className={styles.cardFeatureItem}
+                style={{ color: theme.stageInkMuted }}
+                variants={featureRow}
+                transition={{ duration: 0.5, ease: EASE }}
+              >
+                <Check size={14} strokeWidth={2.25} style={{ color: theme.accentOnStage }} />
+                <span>{feature}</span>
+              </motion.li>
+            ))}
+          </motion.ul>
+        )}
       </div>
-    </div>
+    </motion.div>
   );
 }

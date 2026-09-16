@@ -17,6 +17,7 @@ const panelThemes: ServiceCardTheme[] = [
     cardBg: "#ffffff",
     cardInk: "#1d1d1f",
     borderColors: { primary: "#d6d6d6", secondary: "#a8a8ac", accent: "var(--color-accent)" },
+    accentOnStage: "var(--color-accent)",
   },
   {
     stageBg: "#f5f5f7",
@@ -26,6 +27,7 @@ const panelThemes: ServiceCardTheme[] = [
     cardBg: "#1d1d1f",
     cardInk: "#ffffff",
     borderColors: { primary: "#3a3a3c", secondary: "#6e6e73", accent: "var(--color-accent)" },
+    accentOnStage: "#b05520",
   },
   {
     stageBg: "#1d1d1f",
@@ -35,11 +37,13 @@ const panelThemes: ServiceCardTheme[] = [
     cardBg: "#ffffff",
     cardInk: "#1d1d1f",
     borderColors: { primary: "#d6d6d6", secondary: "#a8a8ac", accent: "var(--color-accent)" },
+    accentOnStage: "var(--color-accent)",
   },
 ];
 
 export default function Services({ locale }: { locale: Locale }) {
   const t = dictionaries[locale].services;
+  const SITE_URL = "https://nicksitchinava.dev";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -49,6 +53,7 @@ export default function Services({ locale }: { locale: Locale }) {
       position: index + 1,
       name: service.title,
       description: service.description,
+      url: `${SITE_URL}/${locale}/services/${service.slug}`,
     })),
   };
 
@@ -76,6 +81,7 @@ export default function Services({ locale }: { locale: Locale }) {
                   locale={locale}
                   theme={theme}
                   learnMoreLabel={t.cta}
+                  featuresFirst={index === 1}
                 />
               </FlowSection>
             );

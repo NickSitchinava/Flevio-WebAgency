@@ -6,6 +6,7 @@ import styles from "./ServicesCursor.module.css";
 
 interface CursorContextValue {
   setActive: (active: boolean) => void;
+  setHovered: (hovered: boolean) => void;
 }
 
 const CursorContext = createContext<CursorContextValue | null>(null);
@@ -20,6 +21,7 @@ export default function ServicesCursor({ children }: { children: React.ReactNode
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const [pointerFine, setPointerFine] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const enabled = pointerFine && !prefersReducedMotion;
@@ -46,11 +48,12 @@ export default function ServicesCursor({ children }: { children: React.ReactNode
     const handleLeave = () => {
       setVisible(false);
       setActive(false);
+      setHovered(false);
     };
 
-    node.addEventListener("pointermove", handleMove);
-    node.addEventListener("pointerenter", handleEnter);
-    node.addEventListener("pointerleave", handleLeave);
+    node.addEventListener("pointermove", handleMove, { passive: true });
+    node.addEventListener("pointerenter", handleEnter, { passive: true });
+    node.addEventListener("pointerleave", handleLeave, { passive: true });
     return () => {
       node.removeEventListener("pointermove", handleMove);
       node.removeEventListener("pointerenter", handleEnter);
@@ -59,7 +62,7 @@ export default function ServicesCursor({ children }: { children: React.ReactNode
   }, [enabled, x, y]);
 
   return (
-    <CursorContext.Provider value={{ setActive }}>
+    <CursorContext.Provider value={{ setActive, setHovered }}>
       <div ref={containerRef} className={enabled ? styles.scope : undefined}>
         {children}
         {enabled && (
@@ -68,7 +71,7 @@ export default function ServicesCursor({ children }: { children: React.ReactNode
               aria-hidden="true"
               className={styles.dot}
               style={{ left: springX, top: springY }}
-              animate={{ opacity: visible ? 1 : 0, scale: active ? 1.4 : 1 }}
+              animate={{ opacity: visible ? 1 : 0, scale: active ? 1.4 : hovered ? 1.15 : 1 }}
               transition={{ duration: 0.3, ease: EASE }}
             />
             <motion.div
@@ -77,9 +80,13 @@ export default function ServicesCursor({ children }: { children: React.ReactNode
               style={{ left: springX, top: springY }}
               animate={{
                 opacity: visible ? 1 : 0,
-                scale: active ? 0.32 : 1,
+                scale: active ? 0.32 : hovered ? 1.2 : 1,
                 backgroundColor: active ? "rgba(29,29,31,0.95)" : "rgba(29,29,31,0)",
-                borderColor: active ? "rgba(29,29,31,0)" : "rgba(29,29,31,0.45)",
+                borderColor: active
+                  ? "rgba(29,29,31,0)"
+                  : hovered
+                    ? "rgba(29,29,31,0.7)"
+                    : "rgba(29,29,31,0.45)",
               }}
               transition={{ duration: 0.4, ease: EASE }}
             />
