@@ -15,7 +15,13 @@
   min-height: 42rem;
   padding: 3.5rem;
   border-radius: 24px;
-  background: var(--color-muted-bg);
+  background:
+    radial-gradient(
+      circle at 88% 92%,
+      color-mix(in oklch, var(--color-accent) 10%, transparent) 0%,
+      transparent 55%
+    ),
+    var(--color-muted-bg);
   overflow: visible;
   min-width: 0;
 }
@@ -37,7 +43,10 @@
 
 .trailWindow {
   position: absolute;
-  inset: 2.5rem;
+  top: 9rem;
+  left: 2.5rem;
+  right: 2.5rem;
+  bottom: 2.5rem;
   z-index: 1;
 }
 
@@ -51,6 +60,23 @@
   display: flex;
   align-items: flex-end;
   min-width: 0;
+}
+
+.quotePanel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--color-accent) 55%, transparent) 50%,
+    transparent
+  );
+  pointer-events: none;
 }
 
 .quoteBg {
@@ -108,6 +134,7 @@
   width: 148px;
   border-radius: 14px;
   overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--color-accent) 22%, transparent);
 }
 
 .deliveryLink {
@@ -116,7 +143,7 @@
   display: block;
   border-radius: 14px;
   background: var(--color-muted-bg);
-  border: 1px solid transparent;
+  border: 1px solid color-mix(in oklch, var(--color-accent) 8%, transparent);
   transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
 }
 
@@ -127,6 +154,12 @@
 
 .deliveryLink:active {
   transform: scale(0.98);
+}
+
+.deliveryLink:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-color: var(--color-antigravity);
 }
 
 .deliveryLinkPrivate {
@@ -204,7 +237,7 @@
   letter-spacing: 0.01em;
   color: var(--color-muted);
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
+  border: 1px solid color-mix(in oklch, var(--color-accent) 14%, var(--color-border));
   border-radius: 999px;
   padding: 0.25rem 0.65rem;
   transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
@@ -221,6 +254,18 @@
   background: transparent;
 }
 
+.deliveryPrivateBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .deliveryLink,
   .deliveryCardIcon,
@@ -234,6 +279,13 @@
   .quotePanel {
     min-height: 36rem;
     padding: 3rem;
+  }
+
+  .trailWindow {
+    top: 8rem;
+    left: 2rem;
+    right: 2rem;
+    bottom: 2rem;
   }
 
   .quoteText {
@@ -259,7 +311,10 @@
   }
 
   .trailWindow {
-    inset: 2rem;
+    top: 7rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
   }
 
   .deliveryStrip {
@@ -273,6 +328,10 @@
 
   .deliveryLink {
     flex: 1 1 calc(50% - 0.3rem);
+  }
+
+  .deliveryLink:last-child {
+    flex: 1 1 100%;
   }
 }
 
@@ -299,7 +358,10 @@
   }
 
   .trailWindow {
-    inset: 1.5rem;
+    top: 6rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.25rem;
   }
 
   .quoteMark {

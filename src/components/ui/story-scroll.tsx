@@ -95,6 +95,7 @@ const FlowArt: React.FC<FlowArtProps> = ({
               start: 'top bottom',
               end: 'top 25%',
               scrub: true,
+              invalidateOnRefresh: true,
             },
           });
           if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
@@ -108,14 +109,30 @@ const FlowArt: React.FC<FlowArtProps> = ({
               end: 'bottom top',
               pin: true,
               pinSpacing: false,
+              invalidateOnRefresh: true,
             }),
           );
         }
       });
 
+      let refreshScheduled = false;
+      const refresh = () => {
+        if (refreshScheduled) return;
+        refreshScheduled = true;
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+          refreshScheduled = false;
+        });
+      };
+
+      document.fonts?.ready?.then(refresh).catch(() => undefined);
+      window.addEventListener('load', refresh);
+      window.visualViewport?.addEventListener('resize', refresh);
       ScrollTrigger.refresh();
 
       return () => {
+        window.removeEventListener('load', refresh);
+        window.visualViewport?.removeEventListener('resize', refresh);
         triggers.forEach((t) => t.kill());
       };
     },

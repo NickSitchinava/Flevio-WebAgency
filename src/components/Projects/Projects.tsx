@@ -23,6 +23,8 @@ const TRAIL_IMAGES = [
   { src: "/images/projects/george-portfolio-detail.webp", alt: "George Sitchinava portfolio detail" },
   { src: "/images/projects/fdash-hero.webp", alt: "F-Dash finance dashboard" },
   { src: "/images/projects/fdash-detail.webp", alt: "F-Dash finance dashboard detail" },
+  { src: "/images/projects/bike-summer-fest-hero.webp", alt: "Bike Summer Fest" },
+  { src: "/images/projects/bike-summer-fest-detail.webp", alt: "Bike Summer Fest detail" },
   { src: "/images/projects/company-landing-hero.webp", alt: "Company landing page" },
 ];
 
@@ -36,6 +38,15 @@ export default function Projects({ locale }: { locale: Locale }) {
   const [quoteInView, setQuoteInView] = useState(false);
   const [trailInView, setTrailInView] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [tabVisible, setTabVisible] = useState(true);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const evaluate = () => setTabVisible(document.visibilityState === "visible");
+    evaluate();
+    document.addEventListener("visibilitychange", evaluate);
+    return () => document.removeEventListener("visibilitychange", evaluate);
+  }, []);
 
   useEffect(() => {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -158,7 +169,7 @@ export default function Projects({ locale }: { locale: Locale }) {
 
         <div className={styles.quotePanel} ref={quotePanelRef}>
           <div className={styles.quoteBg} aria-hidden="true">
-            {quoteInView && !reduceMotion && (
+            {quoteInView && tabVisible && !reduceMotion && (
               <Antigravity
                 count={280}
                 magnetRadius={4.5}
@@ -203,9 +214,9 @@ export default function Projects({ locale }: { locale: Locale }) {
               <div className={styles.deliveryCardTop}>
                 <span className={styles.deliveryCardTitle}>{link.title}</span>
                 {link.private ? (
-                  <Lock size={14} strokeWidth={2} className={styles.deliveryCardIcon} />
+                  <Lock size={14} strokeWidth={2} className={styles.deliveryCardIcon} aria-hidden="true" />
                 ) : (
-                  <Link2 size={14} strokeWidth={2} className={styles.deliveryCardIcon} />
+                  <Link2 size={14} strokeWidth={2} className={styles.deliveryCardIcon} aria-hidden="true" />
                 )}
               </div>
 
@@ -214,13 +225,24 @@ export default function Projects({ locale }: { locale: Locale }) {
               <div className={styles.deliveryCardMeta}>
                 <span className={styles.deliveryCardChip}>{link.region}</span>
                 <span className={styles.deliveryCardChip}>{link.duration}</span>
+                {link.private && (
+                  <span className={styles.deliveryPrivateBadge}>
+                    <Lock size={11} strokeWidth={2.25} aria-hidden="true" />
+                    {t.privateLabel}
+                  </span>
+                )}
               </div>
             </div>
           );
 
           if (link.private || !link.href) {
             return (
-              <div key={link.title} className={`${styles.deliveryLink} ${styles.deliveryLinkPrivate}`}>
+              <div
+                key={link.title}
+                className={`${styles.deliveryLink} ${styles.deliveryLinkPrivate}`}
+                role="group"
+                aria-label={`${link.title}. ${t.privateLabel}`}
+              >
                 {card}
               </div>
             );

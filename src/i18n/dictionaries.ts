@@ -117,6 +117,7 @@ export interface ProjectsDictionary {
   problemStatement: string;
   problemAttribution: string;
   showreelLabel: string;
+  privateLabel: string;
   items: { title: string; description: string }[];
   deliveryLinks: ProjectsDeliveryLink[];
 }
@@ -270,6 +271,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Every business we work with has a problem a template can't fix. We dig into what's actually slowing down calls and bookings, then build the exact site that solves it.",
       problemAttribution: "— How we approach every project",
       showreelLabel: "Showreel",
+      privateLabel: "Private project",
       items: [
         { title: "Project One", description: "A short description of this project goes here." },
         { title: "Project Two", description: "A short description of this project goes here." },
@@ -299,6 +301,14 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "13–15 weeks",
           href: "https://f-dash.vercel.app/",
           previewSrc: "/images/previews/fdash.webp",
+        },
+        {
+          title: "Bike Summer Fest",
+          description: "Event landing page",
+          region: "Georgia",
+          duration: "1–2 weeks",
+          href: "https://bike-summer-fest.vercel.app/",
+          previewSrc: "/images/previews/bike-summer-fest.webp",
         },
         {
           title: "Company landing page",
@@ -549,6 +559,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "ყველა ბიზნესს, რომელთანაც ვმუშაობთ, აქვს პრობლემა, რომელსაც შაბლონი ვერ გადაწყვეტს. ჩვენ ღრმად ვსწავლობთ, რა ანელებს რეალურად ზარებსა და ჯავშნებს, და შემდეგ ვქმნით ზუსტად იმ საიტს, რომელიც ამას აგვარებს.",
       problemAttribution: "— ჩვენი მიდგომა ყველა პროექტისადმი",
       showreelLabel: "შოურილი",
+      privateLabel: "პირადი პროექტი",
       items: [
         { title: "პროექტი პირველი", description: "ამ პროექტის მოკლე აღწერა განთავსდება აქ." },
         { title: "პროექტი მეორე", description: "ამ პროექტის მოკლე აღწერა განთავსდება აქ." },
@@ -578,6 +589,14 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "13–15 კვირა",
           href: "https://f-dash.vercel.app/",
           previewSrc: "/images/previews/fdash.webp",
+        },
+        {
+          title: "Bike Summer Fest",
+          description: "ივენთის ლენდინგ გვერდი",
+          region: "საქართველო",
+          duration: "1–2 კვირა",
+          href: "https://bike-summer-fest.vercel.app/",
+          previewSrc: "/images/previews/bike-summer-fest.webp",
         },
         {
           title: "კომპანიის ლენდინგ გვერდი",
