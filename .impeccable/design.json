@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-11T00:56:37.0712269+04:00",
+  "title": "Design System: Flevio",
+  "extensions": {
+    "colorMeta": {
+      "cherry-red": {
+        "role": "primary",
+        "displayName": "Cherry Red",
+        "canonical": "#CD0000",
+        "tonalRamp": [
+          "oklch(15% 0.12 29)",
+          "oklch(25% 0.12 29)",
+          "oklch(35% 0.12 29)",
+          "oklch(45% 0.12 29)",
+          "oklch(55% 0.12 29)",
+          "oklch(68% 0.12 29)",
+          "oklch(82% 0.12 29)",
+          "oklch(95% 0.12 29)"
+        ]
+      },
+      "warm-white": {
+        "role": "neutral",
+        "displayName": "Warm White",
+        "canonical": "#EFEDE6",
+        "tonalRamp": [
+          "oklch(15% 0.015 85)",
+          "oklch(25% 0.015 85)",
+          "oklch(35% 0.015 85)",
+          "oklch(45% 0.015 85)",
+          "oklch(55% 0.015 85)",
+          "oklch(68% 0.015 85)",
+          "oklch(82% 0.015 85)",
+          "oklch(95% 0.015 85)"
+        ]
+      },
+      "atelier-ink": {
+        "role": "neutral",
+        "displayName": "Atelier Ink",
+        "canonical": "#151412",
+        "tonalRamp": [
+          "oklch(15% 0.01 70)",
+          "oklch(25% 0.01 70)",
+          "oklch(35% 0.01 70)",
+          "oklch(45% 0.01 70)",
+          "oklch(55% 0.01 70)",
+          "oklch(68% 0.01 70)",
+          "oklch(82% 0.01 70)",
+          "oklch(95% 0.01 70)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Interactive Display",
+        "purpose": "The canvas-rendered hero word and its stable fallback."
+      },
+      "headline": {
+        "displayName": "Hero Headline",
+        "purpose": "The supporting phrase above the interactive display word."
+      },
+      "headline-result": {
+        "displayName": "Hero Headline Result",
+        "purpose": "The conversion-oriented phrase beneath the interactive display word."
+      },
+      "body": {
+        "displayName": "Conversion Body",
+        "purpose": "Concise desktop hero value statement."
+      },
+      "label": {
+        "displayName": "Action Label",
+        "purpose": "Uppercase CTA labels."
+      },
+      "annotation": {
+        "displayName": "Technical Annotation",
+        "purpose": "Capability notes and construction metadata."
+      },
+      "mobile-headline": {
+        "displayName": "Mobile Hero Headline",
+        "purpose": "The opening hero phrase on phone and tablet layouts."
+      },
+      "mobile-headline-result": {
+        "displayName": "Mobile Hero Headline Result",
+        "purpose": "The right-aligned result phrase below the interactive mobile word."
+      },
+      "mobile-body": {
+        "displayName": "Mobile Conversion Body",
+        "purpose": "The compact mobile hero value statement."
+      },
+      "mobile-label": {
+        "displayName": "Mobile Action Label",
+        "purpose": "Uppercase labels for the two mobile hero actions."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "hierarchy-entrance",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "A 0.72-second fade-and-rise entrance for the responsive hero headline, conversion block, and capability note."
+      },
+      {
+        "name": "button-radial-fill",
+        "value": "0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Expands the CTA fill from pointer location or keyboard-focus center."
+      },
+      {
+        "name": "live-type-return",
+        "value": "spring(320, 22)",
+        "purpose": "Returns a displaced glyph with stiffness 320 and damping 22."
+      },
+      {
+        "name": "live-type-sweep",
+        "value": "fine-pointer only",
+        "purpose": "Runs the autonomous technical sweep on fine pointers only; coarse pointers and reduced motion keep it disabled."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-mobile-max",
+        "value": "380px"
+      },
+      {
+        "name": "tablet-atelier-start",
+        "value": "600px"
+      },
+      {
+        "name": "atelier-desktop",
+        "value": "1024px"
+      },
+      {
+        "name": "short-mobile-height",
+        "value": "680px"
+      },
+      {
+        "name": "mobile-landscape-height",
+        "value": "520px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The dominant Contact Us action across the responsive hero, with an ink fill response.",
+      "html": "<button class=\"ds-btn-primary\"><span class=\"ds-btn-primary-fill\" aria-hidden=\"true\"></span><span class=\"ds-btn-primary-label\">CONTACT US</span></button>",
+      "css": ".ds-btn-primary { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 50px; overflow: hidden; padding: 0.82rem 1rem; border: 0; border-radius: 999px; background: #CD0000; color: #EFEDE6; font-family: Inter, Arial, sans-serif; font-size: clamp(0.72rem, 3vw, 0.82rem); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: transform 160ms ease, color 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary-fill { position: absolute; left: 50%; top: 50%; width: 160%; aspect-ratio: 1; border-radius: 50%; background: #151412; transform: translate(-50%, -50%) scale(0); transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary-label { position: relative; z-index: 1; } .ds-btn-primary:hover .ds-btn-primary-fill, .ds-btn-primary:focus-visible .ds-btn-primary-fill { transform: translate(-50%, -50%) scale(1); } .ds-btn-primary:focus-visible { outline: 2px solid #CD0000; outline-offset: 3px; } .ds-btn-primary:active { transform: scale(0.97); } @media (min-width: 1024px) { .ds-btn-primary { min-width: 13rem; min-height: 58px; padding: 1rem 1.8rem; font-size: 0.88rem; letter-spacing: 0.08em; } } @media (prefers-reduced-motion: reduce) { .ds-btn-primary, .ds-btn-primary-fill { transition: none; } .ds-btn-primary:active { transform: none; } }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "The quieter View Our Work action across the responsive hero, with a red fill response.",
+      "html": "<button class=\"ds-btn-secondary\"><span class=\"ds-btn-secondary-fill\" aria-hidden=\"true\"></span><span class=\"ds-btn-secondary-label\">VIEW OUR WORK</span></button>",
+      "css": ".ds-btn-secondary { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 50px; overflow: hidden; padding: 0.82rem 1rem; border: 1px solid rgba(21,20,18,0.34); border-radius: 999px; background: rgba(239,237,230,0.86); color: #151412; font-family: Inter, Arial, sans-serif; font-size: clamp(0.72rem, 3vw, 0.82rem); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: transform 160ms ease, color 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-secondary-fill { position: absolute; left: 50%; top: 50%; width: 160%; aspect-ratio: 1; border-radius: 50%; background: #CD0000; transform: translate(-50%, -50%) scale(0); transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-secondary-label { position: relative; z-index: 1; } .ds-btn-secondary:hover, .ds-btn-secondary:focus-visible { color: #EFEDE6; } .ds-btn-secondary:hover .ds-btn-secondary-fill, .ds-btn-secondary:focus-visible .ds-btn-secondary-fill { transform: translate(-50%, -50%) scale(1); } .ds-btn-secondary:focus-visible { outline: 2px solid #CD0000; outline-offset: 3px; } .ds-btn-secondary:active { transform: scale(0.97); } @media (min-width: 1024px) { .ds-btn-secondary { min-width: 12rem; min-height: 58px; padding: 1rem 1.8rem; background: rgba(239,237,230,0.82); font-size: 0.88rem; letter-spacing: 0.08em; } } @media (prefers-reduced-motion: reduce) { .ds-btn-secondary, .ds-btn-secondary-fill { transition: none; } .ds-btn-secondary:active { transform: none; } }"
+    },
+    {
+      "name": "Live Type Selection",
+      "kind": "custom",
+      "description": "A static preview of the responsive TechText glyph frame; production touch preserves pan-y, supports direct drag, and disables autonomous sweep on coarse pointers.",
+      "html": "<div class=\"ds-live-type\" aria-label=\"Websites\"><span>WEB</span><span class=\"ds-live-type-selected\">S<span class=\"ds-live-type-size\">206 × 248</span><i class=\"ds-live-type-handle ds-live-type-tl\"></i><i class=\"ds-live-type-handle ds-live-type-tr\"></i><i class=\"ds-live-type-handle ds-live-type-br\"></i><i class=\"ds-live-type-handle ds-live-type-bl\"></i></span><span>ITES</span></div>",
+      "css": ".ds-live-type { display: flex; align-items: baseline; padding: 3rem 1rem 1rem; overflow: hidden; background: #EFEDE6; color: #151412; font-family: Roboto, Arial, sans-serif; font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 700; line-height: 0.8; letter-spacing: -0.04em; white-space: nowrap; } .ds-live-type-selected { position: relative; display: inline-block; outline: 1px dashed #CD0000; outline-offset: 0.08em; } .ds-live-type-size { position: absolute; left: -0.08em; top: -2.2em; color: #CD0000; font-family: Inter, Arial, sans-serif; font-size: 10px; font-weight: 700; line-height: 1; letter-spacing: 0; } .ds-live-type-handle { position: absolute; width: 7px; height: 7px; border: 1px solid #CD0000; background: #EFEDE6; } .ds-live-type-tl { left: -0.11em; top: -0.11em; } .ds-live-type-tr { right: -0.11em; top: -0.11em; } .ds-live-type-br { right: -0.11em; bottom: -0.11em; } .ds-live-type-bl { left: -0.11em; bottom: -0.11em; }"
+    },
+    {
+      "name": "Atelier Proof Surface",
+      "kind": "custom",
+      "description": "The static responsive warm-white proof field with breakpoint-tuned dots and diagonal red light.",
+      "html": "<div class=\"ds-proof-surface\"><span class=\"ds-proof-surface-label\">LIVE TYPE ATELIER</span></div>",
+      "css": ".ds-proof-surface { position: relative; min-height: 220px; overflow: hidden; background: radial-gradient(70% 82% at 10% 8%, rgba(255,255,255,0.72), transparent 66%), radial-gradient(55% 70% at 96% 4%, rgba(205,0,0,0.12), transparent 72%), linear-gradient(112deg, #EFEDE6 0%, #E9E5DD 58%, #EFEDE6 100%); color: #151412; isolation: isolate; } .ds-proof-surface::before { content: \"\"; position: absolute; inset: -60% -10%; z-index: -1; opacity: 0.72; background: linear-gradient(180deg, transparent 0%, rgba(205,0,0,0.08) 28%, rgba(205,0,0,0.9) 48%, rgba(205,0,0,0.24) 63%, transparent 82%); transform: rotate(-43deg) scaleX(0.16); } .ds-proof-surface::after { content: \"\"; position: absolute; inset: 0; z-index: -1; opacity: 0.42; background-image: radial-gradient(circle at 1px 1px, rgba(21,20,18,0.26) 1px, transparent 0); background-size: 20px 20px; mask-image: linear-gradient(to bottom, #000, transparent); } .ds-proof-surface-label { position: absolute; left: 5%; bottom: 12%; font-family: Inter, Arial, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Capability Annotation",
+      "kind": "custom",
+      "description": "A quiet factual note that balances the lower-right on desktop and bottom-right on mobile when height permits.",
+      "html": "<p class=\"ds-capability\">CUSTOM DESIGN ·<br>HAND-CODED<br>DEVELOPMENT</p>",
+      "css": ".ds-capability { width: 10rem; margin: 0; padding-left: 1rem; border-left: 1px solid rgba(21,20,18,0.32); color: rgba(21,20,18,0.72); font-family: Inter, Arial, sans-serif; font-size: 0.78rem; font-weight: 700; line-height: 1.45; letter-spacing: 0.08em; text-align: left; text-transform: uppercase; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Live Type Atelier",
+    "overview": "Flevio's hero is a warm-white technical proof surface where oversized type behaves like crafted material rather than a marketing ornament. Cherry-red light fields, sparse construction marks, and deliberate negative space make the experience premium, precise, confident, and experimental without obscuring the conversion path.\n\nThe system demonstrates the product promise: custom design and hand-coded development are visible in the interface itself. Its signature is a code-drawn selection frame that turns typography into evidence of craft; supporting copy and controls stay restrained so that the proof remains legible.\n\nThis is currently a scoped new world, not a completed site-wide rollout. It is authoritative for the complete hero: the approved desktop composition at 1024px and above and its responsive mobile adaptation through 1023px. All later incumbent sections retain their existing visual system until explicitly redesigned; do not silently retrofit them from this document.",
+    "keyCharacteristics": [
+      "Warm-white technical proof surface",
+      "Cherry-red skewed light fields used with restraint",
+      "Oversized editorial typography with strong negative space",
+      "Sparse technical annotations and selection geometry",
+      "Interaction as evidence of custom, hand-coded craft",
+      "Responsive mobile composition with static, performant atmosphere",
+      "English and Georgian layouts tuned independently where required",
+      "Clear conversion hierarchy for international service businesses"
+    ],
+    "rules": [
+      {
+        "name": "The Red-as-Evidence Rule",
+        "body": "Cherry Red marks authored interaction, decisive action, or directional light; it is not general-purpose decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Transitional Scope Rule",
+        "body": "Apply this palette to the responsive hero only until another surface is explicitly redesigned into the same world.",
+        "section": "colors"
+      },
+      {
+        "name": "The Type-Is-the-Proof Rule",
+        "body": "The largest type must demonstrate bespoke craft through scale, fit, or interaction; never reduce it to a generic centered headline treatment.",
+        "section": "typography"
+      },
+      {
+        "name": "The Wide-Statement Rule",
+        "body": "Keep primary display phrases broad and shallow. Do not force the headline into narrow, multi-line text blocks.",
+        "section": "typography"
+      },
+      {
+        "name": "The One-Viewport Rule",
+        "body": "The hero must fit inside one viewport at every supported width and must not create overflow below its boundary.",
+        "section": "layout"
+      },
+      {
+        "name": "The Responsive Atelier Rule",
+        "body": "Keep one visual world across the 1024px boundary while changing its composition: mobile is a deliberate vertical adaptation, and desktop retains its established asymmetric arrangement.",
+        "section": "layout"
+      },
+      {
+        "name": "The Light-Not-Shadow Rule",
+        "body": "Create atmosphere with directional color fields and tonal layering; do not add card shadows or floating glass panels to the hero.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Geometry Contrast Rule",
+        "body": "Use hard-edged construction geometry around type and soft pill geometry for controls so interaction and evidence remain visually distinct.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do use Warm White as the dominant hero field and reserve Cherry Red for light, action, focus, and technical evidence.",
+      "Do keep the oversized headline immediately readable before and during interaction.",
+      "Do preserve the primary Contact Us action and the secondary View Our Work action as a clear conversion pair on mobile and desktop.",
+      "Do use the established `cubic-bezier(0.16, 1, 0.3, 1)` hierarchy entrance and provide reduced-motion fallbacks.",
+      "Do preserve English and Georgian layouts, including language-specific mobile headline sizing.",
+      "Do keep mobile background atmosphere static and disable autonomous TechText sweep on coarse pointers."
+    ],
+    "donts": [
+      "Don't turn the system into a generic centered agency template.",
+      "Don't use Cherry Red as ambient decoration without an interaction, hierarchy, or directional-light purpose.",
+      "Don't animate the mobile background or enable automatic TechText sweep on coarse-pointer devices.",
+      "Don't let the oversized TechText canvas escape the hero's local clipping boundary.",
+      "Don't claim that incumbent sections below the hero already use the Live Type Atelier world.",
+      "Don't fabricate testimonials, performance claims, or business results as visual proof."
+    ]
+  }
+}

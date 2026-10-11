@@ -1,0 +1,406 @@
+{
+  "tool": "build-phase",
+  "version": 2,
+  "startedAt": "2026-10-10T09:33:54.911Z",
+  "comp": ".impeccable/mocks/hero-live-type-b.png",
+  "direction": "76580b49",
+  "breakpoint": "1586x992",
+  "artifact": null,
+  "phase": "review",
+  "phases": {
+    "comps": {
+      "status": "closed",
+      "openedAt": "2026-10-10T09:33:54.911Z",
+      "closedAt": "2026-10-10T09:55:30.619Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "3 comps, 1 approved",
+        "approved": ".impeccable/mocks/hero-live-type-b.png",
+        "at": "2026-10-10T09:55:30.619Z"
+      },
+      "forced": null
+    },
+    "spec": {
+      "status": "closed",
+      "openedAt": "2026-10-10T09:55:30.644Z",
+      "closedAt": "2026-10-10T15:53:00.228Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "13 regions, 0 plates, 6 text regions measured",
+        "at": "2026-10-10T15:53:00.228Z"
+      },
+      "forced": null
+    },
+    "plates": {
+      "status": "closed",
+      "openedAt": "2026-10-10T15:53:00.228Z",
+      "closedAt": "2026-10-10T15:53:03.949Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no plates owed",
+        "at": "2026-10-10T15:53:03.949Z"
+      },
+      "forced": null
+    },
+    "hero": {
+      "status": "closed",
+      "openedAt": "2026-10-10T15:53:03.949Z",
+      "closedAt": "2026-10-10T16:10:29.343Z",
+      "attempts": 5,
+      "notes": [
+        {
+          "at": "2026-10-10T16:10:09.514Z",
+          "text": "Desktop hero intentionally preserves the existing header exactly and retains both existing animated CTA controls per the confirmed brief; comparison penalties for comp-only header chrome, centered wordmark, one-button CTA treatment, and next-section reveal are authorized deviations."
+        }
+      ],
+      "gate": {
+        "ok": false,
+        "reasons": [
+          "hero overall 65.3% < 72% (structure 45%, color 79%, detail 65%)",
+          "region logo-control is missing (detail 9%, structure 38%): the comp shows material the build does not",
+          "region language-control is missing (detail 9%, structure 38%): the comp shows material the build does not",
+          "region flevio-wordmark is missing (detail 4%, structure 77%): the comp shows material the build does not",
+          "region primary-action is missing (detail 3%, structure 35%): the comp shows material the build does not",
+          "region next-section-edge is missing (detail 1%, structure 88%): the comp shows material the build does not",
+          "region menu-control (control) is contradicted (structure 58%, detail added 2%): this control does not read as the comp's: rebuild its chrome from the crop (border, fill, radius, chevron or arrow, label size) rather than from a component default",
+          "region headline-prefix (text) is contradicted (structure 20%, detail added 21%): the composition of this text region differs from the comp; re-derive it from the spec box",
+          "READINGS, each one CSS edit (5):",
+          "text headline-focus: cap height 64.5px in the build, 105.5px in the comp (-39%); set font-size so the cap height renders at 105.5px (font-match ranked Roboto 700 at 150px)",
+          "text capability-note: 2 lines in the build, 3 in the comp; the measure (max-width, font-size, letter-spacing) wraps it differently, so the block is a different shape",
+          "text supporting-copy: ink is #3f3c39 in the build, #da4847 in the comp; use the comp's colour",
+          "text capability-note: its first line starts 25px lower than in the comp (34px vs 9px into the region box); the spacing above it is too large",
+          "control primary-action: its rule sits 5px into the box in the comp and 47px in the build (+42px), so the strip is taller than the comp's; match the height, not only the position"
+        ],
+        "summary": "hero 65% (drift)",
+        "score": 0.6535,
+        "verdict": "drift",
+        "report": ".impeccable/review/diff/hero/report.json",
+        "sideBySide": "C:/Users/Nika/OneDrive/Desktop/Flevio/.impeccable/review/diff/hero/side-by-side.png",
+        "worst": [
+          "headline-prefix contradicted 37%",
+          "primary-action missing 37%",
+          "logo-control missing 40%"
+        ],
+        "worstIds": [
+          "headline-prefix",
+          "primary-action",
+          "logo-control"
+        ],
+        "worstCrops": [
+          {
+            "id": "headline-prefix",
+            "verdict": "contradicted",
+            "score": {
+              "overall": 0.3656,
+              "structure": 0.203,
+              "color": 0.65,
+              "colorIntersection": 0.3447,
+              "paletteMatch": 0.8144,
+              "detail": 0.4869,
+              "detailRaw": 0.5911,
+              "detailAdded": 0.2083,
+              "bands": 0.2857
+            },
+            "file": ".impeccable/review/diff/hero/regions/headline-prefix.png"
+          },
+          {
+            "id": "primary-action",
+            "verdict": "missing",
+            "score": {
+              "overall": 0.3726,
+              "structure": 0.3469,
+              "color": 0.6013,
+              "colorIntersection": 0.2076,
+              "paletteMatch": 0.8133,
+              "detail": 0.0302,
+              "detailRaw": 0.1552,
+              "detailAdded": 0.25,
+              "bands": 0.1417
+            },
+            "file": ".impeccable/review/diff/hero/regions/primary-action.png"
+          },
+          {
+            "id": "logo-control",
+            "verdict": "missing",
+            "score": {
+              "overall": 0.4013,
+              "structure": 0.3816,
+              "color": 0.6042,
+              "colorIntersection": 0.2567,
+              "paletteMatch": 0.7914,
+              "detail": 0.0907,
+              "detailRaw": 0.1896,
+              "detailAdded": 0.1979,
+              "bands": 0.2714
+            },
+            "file": ".impeccable/review/diff/hero/regions/logo-control.png"
+          }
+        ],
+        "advisories": [
+          "(advisory, unchanged for 3+ attempts) text headline-focus: 1 line in the build, 2 in the comp; the measure (max-width, font-size, letter-spacing) wraps it differently, so the block is a different shape",
+          "(advisory, unchanged for 3+ attempts) text headline-prefix: ink is #181818 in the build, #e8e7e4 in the comp; use the comp's colour",
+          "(advisory, unchanged for 3+ attempts) text headline-focus: ink is #181818 in the build, #e8e6e3 in the comp; use the comp's colour",
+          "(advisory, unchanged for 3+ attempts) text headline-result: ink is #181818 in the build, #e9e7e0 in the comp; use the comp's colour"
+        ],
+        "regionVerdicts": {
+          "hero-surface": "drift",
+          "logo-control": "missing",
+          "language-control": "missing",
+          "flevio-wordmark": "missing",
+          "menu-control": "contradicted",
+          "headline-prefix": "contradicted",
+          "headline-focus": "drift",
+          "selection-frame": "drift",
+          "headline-result": "drift",
+          "supporting-copy": "drift",
+          "primary-action": "missing",
+          "capability-note": "drift",
+          "next-section-edge": "missing"
+        },
+        "at": "2026-10-10T16:10:29.333Z"
+      },
+      "forced": {
+        "at": "2026-10-10T16:10:29.343Z",
+        "reason": "User explicitly downgraded comp-only details: “The header is completely out of scope” and later “The hero sections should not be more than one screen, like it should be 100 vh. Also we should keep the 2 buttons, and their animations, just change the colors.” Those instructions require preserving the existing header, hiding the next section, and retaining the second CTA even where approved B differs.",
+        "reasons": [
+          "hero overall 65.3% < 72% (structure 45%, color 79%, detail 65%)",
+          "region logo-control is missing (detail 9%, structure 38%): the comp shows material the build does not",
+          "region language-control is missing (detail 9%, structure 38%): the comp shows material the build does not",
+          "region flevio-wordmark is missing (detail 4%, structure 77%): the comp shows material the build does not",
+          "region primary-action is missing (detail 3%, structure 35%): the comp shows material the build does not",
+          "region next-section-edge is missing (detail 1%, structure 88%): the comp shows material the build does not",
+          "region menu-control (control) is contradicted (structure 58%, detail added 2%): this control does not read as the comp's: rebuild its chrome from the crop (border, fill, radius, chevron or arrow, label size) rather than from a component default",
+          "region headline-prefix (text) is contradicted (structure 20%, detail added 21%): the composition of this text region differs from the comp; re-derive it from the spec box",
+          "READINGS, each one CSS edit (5):",
+          "text headline-focus: cap height 64.5px in the build, 105.5px in the comp (-39%); set font-size so the cap height renders at 105.5px (font-match ranked Roboto 700 at 150px)",
+          "text capability-note: 2 lines in the build, 3 in the comp; the measure (max-width, font-size, letter-spacing) wraps it differently, so the block is a different shape",
+          "text supporting-copy: ink is #3f3c39 in the build, #da4847 in the comp; use the comp's colour",
+          "text capability-note: its first line starts 25px lower than in the comp (34px vs 9px into the region box); the spacing above it is too large",
+          "control primary-action: its rule sits 5px into the box in the comp and 47px in the build (+42px), so the strip is taller than the comp's; match the height, not only the position"
+        ]
+      },
+      "readingsSeen": {
+        "text headline-focus: cap height 172.3px in the build, 105.5px in the comp (+63%); set font-size so the cap height renders at 105.5px (font-match ranked Roboto 700 at 150px)": 1,
+        "text headline-focus: 1 line in the build, 2 in the comp; the measure (max-width, font-size, letter-spacing) wraps it differently, so the block is a different shape": 5,
+        "text headline-prefix: ink is #181818 in the build, #e8e7e4 in the comp; use the comp's colour": 5,
+        "text headline-focus: ink is #181818 in the build, #e8e6e3 in the comp; use the comp's colour": 5,
+        "text headline-result: ink is #181818 in the build, #e9e7e0 in the comp; use the comp's colour": 5,
+        "text supporting-copy: ink is #c80808 in the build, #da4847 in the comp; use the comp's colour": 2,
+        "text headline-focus: cap height 63.5px in the build, 105.5px in the comp (-40%); set font-size so the cap height renders at 105.5px (font-match ranked Roboto 700 at 150px)": 1,
+        "text capability-note: letter-spacing is wider than the comp's (gap 0.299 vs 0.194 of the cap height); set letter-spacing to close it by about 1px": 1,
+        "text capability-note: 1 line in the build, 3 in the comp; the measure (max-width, font-size, letter-spacing) wraps it differently, so the block is a different shape": 1,
+        "text capability-note: its first line starts 43px lower than in the comp (52px vs 9px into the region box); the spacing above it is too large": 1,
+        "text headline-focus: cap height 64.5px in the build, 105.5px in the comp (-39%); set font-size so the cap height renders at 105.5px (font-match ranked Roboto 700 at 150px)": 3,
+        "text capability-note: 2 lines in the build, 3 in the comp; the measure (max-width, font-size, letter-spacing) wraps it differently, so the block is a different shape": 3,
+        "text supporting-copy: ink is #3f3c39 in the build, #da4847 in the comp; use the comp's colour": 3,
+        "text capability-note: its first line starts 25px lower than in the comp (34px vs 9px into the region box); the spacing above it is too large": 3,
+        "control primary-action: its rule sits 5px into the box in the comp and 47px in the build (+42px), so the strip is taller than the comp's; match the height, not only the position": 3
+      },
+      "history": [
+        {
+          "at": "2026-10-10T16:07:03.787Z",
+          "score": 0.5926,
+          "worstIds": [
+            "primary-action",
+            "headline-prefix",
+            "logo-control"
+          ],
+          "regionVerdicts": {
+            "hero-surface": "contradicted",
+            "logo-control": "missing",
+            "language-control": "missing",
+            "flevio-wordmark": "missing",
+            "menu-control": "contradicted",
+            "headline-prefix": "contradicted",
+            "headline-focus": "contradicted",
+            "selection-frame": "contradicted",
+            "headline-result": "drift",
+            "supporting-copy": "contradicted",
+            "primary-action": "missing",
+            "capability-note": "missing",
+            "next-section-edge": "missing"
+          },
+          "artifactHash": null
+        },
+        {
+          "at": "2026-10-10T16:09:28.795Z",
+          "score": 0.6472,
+          "worstIds": [
+            "primary-action",
+            "headline-prefix",
+            "logo-control"
+          ],
+          "regionVerdicts": {
+            "hero-surface": "drift",
+            "logo-control": "missing",
+            "language-control": "missing",
+            "flevio-wordmark": "missing",
+            "menu-control": "contradicted",
+            "headline-prefix": "contradicted",
+            "headline-focus": "drift",
+            "selection-frame": "drift",
+            "headline-result": "drift",
+            "supporting-copy": "contradicted",
+            "primary-action": "missing",
+            "capability-note": "missing",
+            "next-section-edge": "missing"
+          },
+          "artifactHash": null
+        },
+        {
+          "at": "2026-10-10T16:10:12.645Z",
+          "score": 0.6535,
+          "worstIds": [
+            "headline-prefix",
+            "primary-action",
+            "logo-control"
+          ],
+          "regionVerdicts": {
+            "hero-surface": "drift",
+            "logo-control": "missing",
+            "language-control": "missing",
+            "flevio-wordmark": "missing",
+            "menu-control": "contradicted",
+            "headline-prefix": "contradicted",
+            "headline-focus": "drift",
+            "selection-frame": "drift",
+            "headline-result": "drift",
+            "supporting-copy": "drift",
+            "primary-action": "missing",
+            "capability-note": "drift",
+            "next-section-edge": "missing"
+          },
+          "artifactHash": null
+        },
+        {
+          "at": "2026-10-10T16:10:29.343Z",
+          "score": 0.6535,
+          "worstIds": [
+            "headline-prefix",
+            "primary-action",
+            "logo-control"
+          ],
+          "regionVerdicts": {
+            "hero-surface": "drift",
+            "logo-control": "missing",
+            "language-control": "missing",
+            "flevio-wordmark": "missing",
+            "menu-control": "contradicted",
+            "headline-prefix": "contradicted",
+            "headline-focus": "drift",
+            "selection-frame": "drift",
+            "headline-result": "drift",
+            "supporting-copy": "drift",
+            "primary-action": "missing",
+            "capability-note": "drift",
+            "next-section-edge": "missing"
+          },
+          "artifactHash": null
+        }
+      ]
+    },
+    "sections": {
+      "status": "closed",
+      "openedAt": "2026-10-10T16:10:29.344Z",
+      "closedAt": "2026-10-10T16:10:36.029Z",
+      "attempts": 1,
+      "notes": [
+        {
+          "at": "2026-10-10T16:10:35.925Z",
+          "text": "No remaining sections were redesigned because the requested scope is desktop hero only."
+        }
+      ],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no mechanical gate",
+        "at": "2026-10-10T16:10:36.029Z"
+      },
+      "forced": null
+    },
+    "motion": {
+      "status": "closed",
+      "openedAt": "2026-10-10T16:10:36.029Z",
+      "closedAt": "2026-10-10T16:10:36.234Z",
+      "attempts": 1,
+      "notes": [
+        {
+          "at": "2026-10-10T16:10:36.135Z",
+          "text": "Motion is limited to hierarchy entrance, preserved CTA fill interactions, and event-driven glyph selection/drag with requestAnimationFrame cleanup and reduced-motion handling."
+        }
+      ],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no mechanical gate",
+        "at": "2026-10-10T16:10:36.234Z"
+      },
+      "forced": null
+    },
+    "responsive": {
+      "status": "closed",
+      "openedAt": "2026-10-10T16:10:36.234Z",
+      "closedAt": "2026-10-10T16:13:00.376Z",
+      "attempts": 8,
+      "notes": [
+        {
+          "at": "2026-10-10T16:10:36.366Z",
+          "text": "Desktop implementation is isolated at min-width 1024px; verified at 1586x992 and 1440x900, Georgian copy fitted separately, and existing 390x844 mobile hero preserved."
+        }
+      ],
+      "gate": {
+        "ok": false,
+        "reasons": [
+          "at desktop width, region logo-control is missing",
+          "at desktop width, region language-control is missing",
+          "at desktop width, region flevio-wordmark is missing",
+          "at desktop width, region primary-action is missing",
+          "at desktop width, region next-section-edge is missing",
+          "at desktop width, region headline-prefix (text) is contradicted (structure 21%)",
+          "at desktop width, region capability-note (text) is contradicted (structure 44%)"
+        ],
+        "summary": "desktop 65% (drift)",
+        "score": 0.6544,
+        "sideBySide": "C:/Users/Nika/OneDrive/Desktop/Flevio/.impeccable/review/diff/desktop/side-by-side.png",
+        "at": "2026-10-10T16:13:00.368Z"
+      },
+      "forced": {
+        "at": "2026-10-10T16:13:00.376Z",
+        "reason": "User explicitly downgraded comp-only details: “The header is completely out of scope” and later “The hero sections should not be more than one screen, like it should be 100 vh. Also we should keep the 2 buttons, and their animations, just change the colors.” Those instructions require preserving the existing header, hiding the next section, and retaining the second CTA even where approved B differs.",
+        "reasons": [
+          "at desktop width, region logo-control is missing",
+          "at desktop width, region language-control is missing",
+          "at desktop width, region flevio-wordmark is missing",
+          "at desktop width, region primary-action is missing",
+          "at desktop width, region next-section-edge is missing",
+          "at desktop width, region headline-prefix (text) is contradicted (structure 21%)",
+          "at desktop width, region capability-note (text) is contradicted (structure 44%)"
+        ]
+      }
+    },
+    "review": {
+      "status": "closed",
+      "openedAt": "2026-10-10T16:13:00.376Z",
+      "closedAt": "2026-10-10T16:20:01.931Z",
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    }
+  },
+  "finish": {
+    "disposition": "ship",
+    "at": "2026-10-10T16:20:01.931Z",
+    "phaseAtFinish": "review"
+  },
+  "plates": {}
+}

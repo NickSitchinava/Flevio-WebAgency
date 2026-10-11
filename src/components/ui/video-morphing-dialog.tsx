@@ -87,7 +87,6 @@ export function VideoMorphingDialog({
                     className={styles.expandedVideo}
                     src={videoSrc}
                     autoPlay
-                    muted
                     loop
                     playsInline
                     controls

@@ -139,6 +139,7 @@ export interface Dictionary {
     menuLabel: string;
   };
   hero: {
+  ariaLabel: string;
   eyebrow: string;
   headlinePrefix: string;
   headlineEmphasis: string;
@@ -147,6 +148,11 @@ export interface Dictionary {
   chips: string[];
   primaryCta: string;
   secondaryCta: string;
+  desktopHeadlineLines: [string, string, string];
+  desktopSubhead: string;
+  desktopPrimaryCta: string;
+  desktopSecondaryCta: string;
+  desktopCapability: string;
 };
   services: {
     heading: string;
@@ -205,6 +211,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       menuLabel: "Menu",
     },
     hero: {
+      ariaLabel: "Introduction",
       eyebrow: "Web Design & Development Agency",
       headlinePrefix: "We build ",
       headlineEmphasis: "websites that convert",
@@ -214,6 +221,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
       chips: ["Website Design", "Landing Pages", "Web Applications"],
       primaryCta: "View Our Work",
       secondaryCta: "Start a Project",
+      desktopHeadlineLines: ["We build", "Websites", "That convert"],
+      desktopSubhead:
+        "Custom websites shaped around your business, designed to earn trust and turn attention into action.",
+      desktopPrimaryCta: "Contact Us",
+      desktopSecondaryCta: "View Our Work",
+      desktopCapability: "Custom design · Hand-coded development",
     },
     services: {
       heading: "Services",
@@ -492,6 +505,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       menuLabel: "მენიუ",
     },
     hero: {
+      ariaLabel: "შესავალი",
       eyebrow: "ვებ დიზაინისა და დეველოპმენტის სააგენტო",
       headlinePrefix: "ჩვენ ვქმნით ",
       headlineEmphasis: "ვებსაიტებს, რომლებიც კონვერტირებენ",
@@ -501,6 +515,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
       chips: ["ვებსაიტის დიზაინი", "ლენდინგ გვერდები", "ვებ აპლიკაციები"],
       primaryCta: "ნახეთ ჩვენი ნამუშევრები",
       secondaryCta: "დაიწყეთ პროექტი",
+      desktopHeadlineLines: ["ჩვენ ვქმნით", "ვებსაიტებს", "რომლებიც შედეგს ქმნიან"],
+      desktopSubhead:
+        "თქვენს ბიზნესზე მორგებული ინდივიდუალური ვებსაიტები, რომლებიც ნდობას აძლიერებენ და ყურადღებას მოქმედებად გარდაქმნიან.",
+      desktopPrimaryCta: "დაგვიკავშირდით",
+      desktopSecondaryCta: "ნახეთ ჩვენი ნამუშევრები",
+      desktopCapability: "ინდივიდუალური დიზაინი · ხელით დაწერილი კოდი",
     },
     services: {
       heading: "სერვისები",

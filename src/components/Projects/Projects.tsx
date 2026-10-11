@@ -202,7 +202,7 @@ export default function Projects({ locale }: { locale: Locale }) {
       <div className={styles.deliveryStrip}>
         <div className={styles.deliveryVideoCell}>
           <VideoMorphingDialog
-            videoSrc="/videos/showreel.mp4"
+            videoSrc="/videos/flevio-showreel.mp4"
             label={t.showreelLabel}
             active={quoteInView}
           />

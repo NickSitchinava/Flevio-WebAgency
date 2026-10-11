@@ -1,0 +1,86 @@
+{
+  "regions": [
+    {
+      "id": "hero-surface",
+      "kind": "chrome",
+      "grid": "A0:J9",
+      "container": true,
+      "codeDrawn": true,
+      "note": "Warm-white radial surface with code-drawn masked cherry-red light streaks and a faint dot field"
+    },
+    {
+      "id": "logo-control",
+      "kind": "control",
+      "grid": "A0:A0",
+      "note": "Existing black square Flevio logo control; unchanged header element"
+    },
+    {
+      "id": "language-control",
+      "kind": "control",
+      "grid": "A0:B0",
+      "note": "Existing EN and KA language control; unchanged header element"
+    },
+    {
+      "id": "flevio-wordmark",
+      "kind": "text",
+      "grid": "E0:F0",
+      "note": "Existing centered FLEVIO header wordmark; unchanged header element"
+    },
+    {
+      "id": "menu-control",
+      "kind": "control",
+      "grid": "I0:J0",
+      "note": "Existing Menu pill; unchanged header element"
+    },
+    {
+      "id": "headline-prefix",
+      "kind": "text",
+      "grid": "A1:D2",
+      "note": "Large black WE BUILD line aligned to the left"
+    },
+    {
+      "id": "headline-focus",
+      "kind": "text",
+      "grid": "A2:J5",
+      "container": true,
+      "note": "Enormous near-black WEBSITES word spanning almost the full viewport width"
+    },
+    {
+      "id": "selection-frame",
+      "kind": "chrome",
+      "grid": "E2:F5",
+      "codeDrawn": true,
+      "note": "Code-drawn dashed cherry-red selection frame, handles, and measurement label over one interactive letter"
+    },
+    {
+      "id": "headline-result",
+      "kind": "text",
+      "grid": "F5:J6",
+      "note": "Bold near-black THAT CONVERT line aligned beneath the right side of WEBSITES"
+    },
+    {
+      "id": "supporting-copy",
+      "kind": "text",
+      "grid": "A6:C7",
+      "note": "Three-line value proposition for international service businesses"
+    },
+    {
+      "id": "primary-action",
+      "kind": "control",
+      "grid": "A7:B8",
+      "note": "Cherry-red Contact Us button with arrow"
+    },
+    {
+      "id": "capability-note",
+      "kind": "text",
+      "grid": "I7:J8",
+      "note": "Quiet stacked CUSTOM DESIGN and HAND-CODED DEVELOPMENT note"
+    },
+    {
+      "id": "next-section-edge",
+      "kind": "chrome",
+      "grid": "A9:J9",
+      "note": "Thin dark rule marking the beginning of the next section"
+    }
+  ]
+}

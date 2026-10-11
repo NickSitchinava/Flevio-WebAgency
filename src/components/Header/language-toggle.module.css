@@ -5,6 +5,12 @@
   z-index: 60;
 }
 
+@media (max-width: 1023px) {
+  .wrapper {
+    top: max(1.4rem, calc(env(safe-area-inset-top) + 0.8rem));
+  }
+}
+
 .pill {
   display: flex;
   align-items: center;

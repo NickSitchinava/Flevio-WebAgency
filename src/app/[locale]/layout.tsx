@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Poppins } from "next/font/google";
+import { Inter, Playfair_Display, Poppins, Roboto } from "next/font/google";
 import { ArcRevealHero } from "@/components/ArcRevealHero/ArcRevealHero";
-import PageBottomBlur from "@/components/ui/PageBottomBlur";
 import { locales, defaultLocale, type Locale } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 import SmoothScroll from "@/components/SmoothScroll/SmoothScroll";
@@ -23,6 +22,13 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-poppins",
+  display: "swap",
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-hero-display",
   display: "swap",
 });
 
@@ -95,7 +101,10 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable} ${poppins.variable}`}>
+    <html
+      lang={locale}
+      className={`${inter.variable} ${playfair.variable} ${poppins.variable} ${roboto.variable}`}
+    >
       <body>
         <SmoothScroll />
         <script
@@ -105,7 +114,6 @@ export default async function LocaleLayout({
         <ArcRevealHero greetings={t.loaderGreetings.map((text) => ({ text, lang: locale }))}>
           {children}
         </ArcRevealHero>
-        <PageBottomBlur />
       </body>
     </html>
   );

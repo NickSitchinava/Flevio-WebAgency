@@ -46,3 +46,6 @@ skills/
 #graphify 
 graphify-out/
 .agents/
+
+# Local reference inspection files
+.reference/

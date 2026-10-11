@@ -6,6 +6,12 @@
   pointer-events: auto;
 }
 
+@media (max-width: 1023px) {
+  .wrapper {
+    top: max(1.6rem, calc(env(safe-area-inset-top) + 1rem));
+  }
+}
+
 .shell {
   position: relative;
   display: block;
