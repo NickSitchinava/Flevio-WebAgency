@@ -81,7 +81,7 @@ export default function Hero({ locale }: { locale: Locale }) {
                 lineStyle="dashed"
                 selection
                 labels
-                draggable
+                draggable={false}
                 sweep
               />
             </span>
@@ -96,7 +96,9 @@ export default function Hero({ locale }: { locale: Locale }) {
           variants={fadeUp}
           transition={{ ...desktopTransition, delay: prefersReducedMotion ? 0 : 0.12 }}
         >
-          <p className={styles.mobileSubhead} lang={locale}>{t.desktopSubhead}</p>
+          <p className={styles.mobileSubhead} lang={locale}>
+            {t.desktopSubhead.before}<strong className={styles.subheadAudience}>{t.desktopSubhead.audience}</strong>{t.desktopSubhead.after}
+          </p>
           <div className={styles.mobileActions} lang={locale}>
             <Button
               href="#contact"
@@ -124,6 +126,7 @@ export default function Hero({ locale }: { locale: Locale }) {
               {t.desktopSecondaryCta}
             </Button>
           </div>
+          <p className={styles.mobileReassurance} lang={locale}>{t.ctaReassurance}</p>
         </motion.div>
 
         <motion.p
@@ -183,7 +186,9 @@ export default function Hero({ locale }: { locale: Locale }) {
           variants={fadeUp}
           transition={{ ...desktopTransition, delay: prefersReducedMotion ? 0 : 0.12 }}
         >
-          <p className={styles.desktopSubhead} lang={locale}>{t.desktopSubhead}</p>
+          <p className={styles.desktopSubhead} lang={locale}>
+            {t.desktopSubhead.before}<strong className={styles.subheadAudience}>{t.desktopSubhead.audience}</strong>{t.desktopSubhead.after}
+          </p>
           <div className={styles.desktopActions}>
             <Button
               href="#contact"
@@ -211,6 +216,7 @@ export default function Hero({ locale }: { locale: Locale }) {
               {t.desktopSecondaryCta}
             </Button>
           </div>
+          <p className={styles.desktopReassurance} lang={locale}>{t.ctaReassurance}</p>
         </motion.div>
 
         <motion.p

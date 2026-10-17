@@ -1,7 +1,7 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, Check } from "lucide-react";
 import styles from "./pricing-calculator.module.css";
@@ -36,15 +36,21 @@ export function DropdownField({
   locale,
 }: DropdownFieldProps) {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [portalReady, setPortalReady] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0, width: 0 });
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const focusOnOpenRef = useRef<number | null>(null);
+  const fieldId = useId();
+  const labelId = `${fieldId}-label`;
+  const valueId = `${fieldId}-value`;
+  const panelId = `${fieldId}-options`;
   const prefersReducedMotion = useReducedMotion();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const focusOption = (index: number) => {
+    const optionButtons = panelRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]');
+    optionButtons?.[Math.max(0, Math.min(index, optionButtons.length - 1))]?.focus();
+  };
 
   const computeCoords = () => {
     const rect = triggerRef.current?.getBoundingClientRect();
@@ -60,6 +66,9 @@ export function DropdownField({
     if (!open) return;
 
     computeCoords();
+    const focusIndex = focusOnOpenRef.current;
+    focusOnOpenRef.current = null;
+    const focusRaf = focusIndex === null ? 0 : requestAnimationFrame(() => focusOption(focusIndex));
 
     const handlePointerDown = (event: PointerEvent) => {
       const target = event.target as Node;
@@ -92,6 +101,7 @@ export function DropdownField({
     });
 
     return () => {
+      if (focusRaf) cancelAnimationFrame(focusRaf);
       if (rafId) cancelAnimationFrame(rafId);
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
@@ -106,7 +116,7 @@ export function DropdownField({
     <div className={styles.field}>
       <div className={styles.fieldHeader}>
         <span className={styles.fieldIndex}>{index}</span>
-        <span className={styles.fieldLabel} lang={locale}>
+        <span id={labelId} className={styles.fieldLabel} lang={locale}>
           {label}
         </span>
       </div>
@@ -118,10 +128,28 @@ export function DropdownField({
         data-disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={open}
+        aria-controls={panelId}
+        aria-labelledby={`${labelId} ${valueId}`}
         disabled={disabled}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => {
+          setPortalReady(true);
+          setOpen((prev) => !prev);
+        }}
+        onKeyDown={(event) => {
+          if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+          event.preventDefault();
+          const targetIndex = event.key === "ArrowUp" ? options.length - 1 : Math.max(0, options.findIndex((option) => option.value === value));
+          if (open) {
+            focusOption(targetIndex);
+            return;
+          }
+          focusOnOpenRef.current = targetIndex;
+          setPortalReady(true);
+          setOpen(true);
+        }}
       >
         <span
+          id={valueId}
           className={styles.fieldTriggerLabel}
           data-placeholder={!selectedOption}
           lang={locale}
@@ -141,35 +169,37 @@ export function DropdownField({
         </motion.span>
       </button>
 
-      {mounted &&
+      {portalReady &&
         createPortal(
           <AnimatePresence>
             {open && !disabled && (
               <motion.div
                 ref={panelRef}
+                id={panelId}
                 role="listbox"
+                aria-labelledby={labelId}
                 className={styles.fieldPanel}
                 style={{ top: coords.top, left: coords.left, width: coords.width }}
                 lang={locale}
                 initial={
                   prefersReducedMotion
                     ? { opacity: 0 }
-                    : { y: -5, scale: 0.95, filter: "blur(10px)", opacity: 0 }
+                    : { y: -6, opacity: 0 }
                 }
                 animate={
                   prefersReducedMotion
                     ? { opacity: 1 }
-                    : { y: 0, scale: 1, filter: "blur(0px)", opacity: 1 }
+                    : { y: 0, opacity: 1 }
                 }
                 exit={
                   prefersReducedMotion
                     ? { opacity: 0 }
-                    : { y: -5, scale: 0.95, filter: "blur(10px)", opacity: 0 }
+                    : { y: -6, opacity: 0 }
                 }
                 transition={
                   prefersReducedMotion
-                    ? { duration: 0.15 }
-                    : { duration: 0.6, ease: "circInOut", type: "spring" }
+                    ? { duration: 0 }
+                    : { duration: 0.22, ease: [0.16, 1, 0.3, 1] }
                 }
               >
                 {options.map((option, optionIndex) => {
@@ -180,31 +210,31 @@ export function DropdownField({
                       key={option.value}
                       role="option"
                       aria-selected={isActive}
+                      tabIndex={isActive || (!selectedOption && optionIndex === 0) ? 0 : -1}
                       className={styles.fieldOption}
                       data-active={isActive}
                       initial={
                         prefersReducedMotion
                           ? { opacity: 0 }
-                          : { opacity: 0, x: 10, scale: 0.95, filter: "blur(10px)" }
+                          : { opacity: 0, y: 4 }
                       }
                       animate={
                         prefersReducedMotion
                           ? { opacity: 1 }
-                          : { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }
+                          : { opacity: 1, y: 0 }
                       }
                       exit={
                         prefersReducedMotion
                           ? { opacity: 0 }
-                          : { opacity: 0, x: 10, scale: 0.95, filter: "blur(10px)" }
+                          : { opacity: 0, y: 4 }
                       }
                       transition={
                         prefersReducedMotion
-                          ? { duration: 0.1 }
+                          ? { duration: 0 }
                           : {
-                              duration: 0.4,
-                              delay: optionIndex * 0.05,
-                              ease: "easeInOut",
-                              type: "spring",
+                              duration: 0.2,
+                              delay: optionIndex * 0.025,
+                              ease: [0.16, 1, 0.3, 1],
                             }
                       }
                       whileTap={{
@@ -214,6 +244,20 @@ export function DropdownField({
                       onClick={() => {
                         onChange(option.value);
                         setOpen(false);
+                        triggerRef.current?.focus();
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                          event.preventDefault();
+                          focusOption(optionIndex + (event.key === "ArrowDown" ? 1 : -1));
+                        } else if (event.key === "Home" || event.key === "End") {
+                          event.preventDefault();
+                          focusOption(event.key === "Home" ? 0 : options.length - 1);
+                        } else if (event.key === "Escape") {
+                          event.preventDefault();
+                          setOpen(false);
+                          triggerRef.current?.focus();
+                        }
                       }}
                     >
                       <span className={styles.fieldOptionText}>

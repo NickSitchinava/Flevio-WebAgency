@@ -88,7 +88,8 @@ export default async function LocaleLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "Nick Sitchinava",
+    name: "Flevio",
+    founder: { "@type": "Person", name: "Nick Sitchinava" },
     image: `${SITE_URL}/images/logo.webp`,
     url: `${SITE_URL}/${locale}`,
     address: {
@@ -111,7 +112,7 @@ export default async function LocaleLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <ArcRevealHero greetings={t.loaderGreetings.map((text) => ({ text, lang: locale }))}>
+        <ArcRevealHero locale={locale}>
           {children}
         </ArcRevealHero>
       </body>

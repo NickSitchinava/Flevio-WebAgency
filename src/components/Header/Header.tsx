@@ -9,8 +9,8 @@ export default function Header({ locale }: { locale: Locale }) {
 
   const items = [
     { label: t.about, href: `/${locale}#about` },
-    { label: t.services, href: `/${locale}#services` },
     { label: t.projects, href: `/${locale}#projects` },
+    { label: t.services, href: `/${locale}#services` },
     { label: t.contact, href: `/${locale}#contact` },
   ];
 
@@ -18,7 +18,7 @@ export default function Header({ locale }: { locale: Locale }) {
     <>
       <LogoSquare locale={locale} />
       <LanguageToggle locale={locale} />
-      <FloatingMenu items={items} menuLabel={t.menuLabel} />
+      <FloatingMenu items={items} calculatorItem={{ label: t.estimateCost, href: `/${locale}#pricing` }} menuLabel={t.menuLabel} />
     </>
   );
 }

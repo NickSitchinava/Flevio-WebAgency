@@ -145,7 +145,7 @@ const TechText = ({
 
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const coarsePointer = window.matchMedia?.('(pointer: coarse)').matches;
-    const mobileViewport = window.matchMedia('(max-width: 1023px)');
+    const mobileViewport = window.matchMedia('(width < 1024px)');
     let width = 1;
     let height = 1;
     let contentWidth = 1;

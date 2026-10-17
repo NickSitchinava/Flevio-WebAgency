@@ -47,7 +47,7 @@ function Digit({ digit }: { digit: string }) {
           flexDirection: "column",
           alignItems: "center",
         }}
-        initial={false}
+        initial={prefersReducedMotion ? false : { y: 0 }}
         animate={{ y: `-${numeric * 10}%` }}
         transition={prefersReducedMotion ? { duration: 0 } : { type: "spring", ...SPRING }}
       >
@@ -92,14 +92,14 @@ export function SlidingNumber({ value, className, padStart }: SlidingNumberProps
       }}
     >
       {isNegative && <Digit digit="-" />}
-      <AnimatePresence initial={false} mode="popLayout">
+      <AnimatePresence mode="popLayout">
         {digitChars.map((char, indexFromLeft) => {
           const stableKey = digitChars.length - indexFromLeft;
           return (
             <motion.span
               key={stableKey}
               layout
-              initial={{ opacity: 0, width: 0 }}
+              initial={{ opacity: 1, width: "1ch" }}
               animate={{ opacity: 1, width: "1ch" }}
               exit={{ opacity: 0, width: 0 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}

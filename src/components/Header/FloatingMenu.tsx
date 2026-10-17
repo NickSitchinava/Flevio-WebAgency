@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import styles from "./floating-menu.module.css";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -13,6 +14,7 @@ interface MenuItem {
 
 interface FloatingMenuProps {
   items: MenuItem[];
+  calculatorItem: MenuItem;
   menuLabel: string;
   onNavigate?: () => void;
 }
@@ -95,14 +97,15 @@ function MenuLink({
   );
 }
 
-export default function FloatingMenu({ items, menuLabel, onNavigate }: FloatingMenuProps) {
+export default function FloatingMenu({ items, calculatorItem, menuLabel, onNavigate }: FloatingMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   const CLOSED_HEIGHT = 48;
-  const OPEN_HEIGHT = 240;
+  const OPEN_HEIGHT = 306;
   const CLOSED_WIDTH = 128;
-  const OPEN_WIDTH = 240;
+  const OPEN_WIDTH = 280;
 
   useEffect(() => {
     if (!isOpen) return;
@@ -118,7 +121,10 @@ export default function FloatingMenu({ items, menuLabel, onNavigate }: FloatingM
   useEffect(() => {
     if (!isOpen) return;
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsOpen(false);
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        toggleRef.current?.focus();
+      }
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
@@ -168,6 +174,7 @@ export default function FloatingMenu({ items, menuLabel, onNavigate }: FloatingM
         />
 
         <button
+          ref={toggleRef}
           type="button"
           className={styles.toggleBar}
           onClick={() => setIsOpen((value) => !value)}
@@ -206,6 +213,7 @@ export default function FloatingMenu({ items, menuLabel, onNavigate }: FloatingM
 
         <nav
           className={styles.menuItems}
+          inert={!isOpen}
           style={{
             pointerEvents: isOpen ? "auto" : "none",
             opacity: isOpen ? 1 : 0,
@@ -222,6 +230,16 @@ export default function FloatingMenu({ items, menuLabel, onNavigate }: FloatingM
               onNavigate={handleNavigate}
             />
           ))}
+          <motion.a
+            href={calculatorItem.href}
+            className={styles.calculatorLink}
+            onClick={handleNavigate}
+            animate={{ opacity: isOpen ? 1 : 0 }}
+            transition={{ duration: 0.4, delay: isOpen ? 0.4 + 0.08 * items.length : 0, ease }}
+          >
+            {calculatorItem.label}
+            <ArrowUpRight aria-hidden="true" />
+          </motion.a>
         </nav>
       </motion.div>
     </motion.div>

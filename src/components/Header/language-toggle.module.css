@@ -5,9 +5,16 @@
   z-index: 60;
 }
 
+@media (min-width: 1024px) {
+  .wrapper {
+    left: 10.75rem;
+  }
+}
+
 @media (max-width: 1023px) {
   .wrapper {
     top: max(1.4rem, calc(env(safe-area-inset-top) + 0.8rem));
+    left: 12rem;
   }
 }
 
@@ -74,3 +81,19 @@
     transform: none;
   }
 }
+
+@media (max-width: 599px) {
+  .wrapper {
+    left: 7.75rem;
+  }
+
+  .pill {
+    padding-inline: 0.25rem;
+  }
+
+  .segment {
+    min-width: 44px;
+    padding-inline: 0.45rem;
+  }
+}
+

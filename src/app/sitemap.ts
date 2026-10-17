@@ -33,5 +33,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...homeEntries, ...serviceEntries];
+  const legalEntries: MetadataRoute.Sitemap = (["privacy", "terms"] as const).flatMap((document) =>
+    locales.map((locale) => ({
+      url: `${SITE_URL}/${locale}/legal/${document}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+      alternates: {
+        languages: Object.fromEntries(
+          locales.map((language) => [language, `${SITE_URL}/${language}/legal/${document}`])
+        ),
+      },
+    }))
+  );
+
+  return [...homeEntries, ...serviceEntries, ...legalEntries];
 }

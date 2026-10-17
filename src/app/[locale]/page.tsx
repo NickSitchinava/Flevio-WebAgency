@@ -3,7 +3,7 @@ import Hero from "@/components/Hero/Hero";
 import TechStack from "@/components/TechStack/TechStack";
 import About from "@/components/About/About";
 import Services from "@/components/Services/Services";
-import ProjectsPricingTransition from "@/components/Projects/ProjectsPricingTransition";
+import Projects from "@/components/Projects/Projects";
 import PricingCalculator from "@/components/PricingCalculator/PricingCalculator";
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
@@ -32,8 +32,8 @@ export default async function Home({
         <Hero locale={locale} />
         <TechStack />
         <About locale={locale} />
+        <Projects locale={locale} />
         <Services locale={locale} />
-        <ProjectsPricingTransition locale={locale} />
         <PricingCalculator locale={locale} />
         <Contact locale={locale} />
       </main>

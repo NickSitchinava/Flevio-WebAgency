@@ -32,10 +32,22 @@ export function InfiniteSlider({
   const [isHovering, setIsHovering] = useState(false);
   const [groupWidth, setGroupWidth] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const isVisibleRef = useRef(false);
   const rawX = useMotionValue(0);
   const x = useSpring(rawX, { stiffness: 300, damping: 40, mass: 0.4 });
   const currentSpeedRef = useRef(speed);
   const uid = useId();
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+    });
+    observer.observe(slider);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const target = isHovering && speedOnHover !== undefined ? speedOnHover : speed;
@@ -67,7 +79,7 @@ export function InfiniteSlider({
   }, [children, gap]);
 
   useAnimationFrame((_, delta) => {
-    if (prefersReducedMotion || groupWidth === 0) return;
+    if (prefersReducedMotion || groupWidth === 0 || !isVisibleRef.current) return;
 
     const direction = reverse ? 1 : -1;
     const moveBy = direction * currentSpeedRef.current * (delta / 1000);
@@ -81,6 +93,7 @@ export function InfiniteSlider({
 
   return (
     <div
+      ref={sliderRef}
       className={cn("overflow-hidden", className)}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}

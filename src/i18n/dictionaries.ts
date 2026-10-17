@@ -1,10 +1,13 @@
 import type { Locale } from "./config";
 
 export interface PricingCalculatorDictionary {
-  eyebrow: string;
   heading: string;
+  headingLead: string;
+  headingFocus: string;
+  toolLabel: string;
   subhead: string;
   placeholder: string;
+  navigation: { back: string; next: string; viewEstimate: string; review: string };
   steps: {
     projectType: {
       title: string;
@@ -30,6 +33,8 @@ export interface PricingCalculatorDictionary {
       title: string;
       yes: string;
       no: string;
+      yesDescription: string;
+      noDescription: string;
     };
     content: {
       title: string;
@@ -39,6 +44,9 @@ export interface PricingCalculatorDictionary {
   result: {
     timeLabel: string;
     priceLabel: string;
+    startingAt: string;
+    earlyTimeLabel: string;
+    earlyPriceLabel: string;
     weeksUnit: string;
     loadingRate: string;
     ctaButton: string;
@@ -81,23 +89,15 @@ export interface ContactChannel {
 }
 
 export interface ContactDictionary {
-  eyebrow: string;
-  headingLead: string;
-  headingAccent: string;
+  heading: string;
   text: string;
-  statusLabel: string;
-  channelsEyebrow: string;
-  channelsNote: string;
+  whatsappAction: string;
+  trust: { brief: string; reply: string };
+  process: { label: string; stages: [string, string, string] };
   channels: {
     email: ContactChannel;
     whatsapp: ContactChannel;
     instagram: ContactChannel;
-  };
-  map: {
-    location: string;
-    coordinates: string;
-    liveLabel: string;
-    hintLabel: string;
   };
 }
 
@@ -105,20 +105,29 @@ export interface ProjectsDeliveryLink {
   title: string;
   description: string;
   region: string;
-  duration: string;
+  duration?: string;
   href?: string;
   previewSrc: string;
+  heroSrc: string;
+  detailSrc?: string;
   private?: boolean;
 }
 
 export interface ProjectsDictionary {
   heading: string;
-  trailHeading: string;
+  intro: string;
+  scopeLine: string;
+  wheelLabel: string;
+  browseHint: string;
+  viewProjectLabel: string;
   problemStatement: string;
   problemAttribution: string;
   showreelLabel: string;
+  showreelTitle: string;
+  showreelDescription: string;
+  indexHeading: string;
+  indexIntro: string;
   privateLabel: string;
-  items: { title: string; description: string }[];
   deliveryLinks: ProjectsDeliveryLink[];
 }
 
@@ -129,12 +138,12 @@ export interface Dictionary {
     ogDescription: string;
     keywords: string[];
   };
-  loaderGreetings: string[];
    header: {
     about: string;
     services: string;
     projects: string;
     contact: string;
+    estimateCost: string;
     cta: string;
     menuLabel: string;
   };
@@ -149,10 +158,11 @@ export interface Dictionary {
   primaryCta: string;
   secondaryCta: string;
   desktopHeadlineLines: [string, string, string];
-  desktopSubhead: string;
+  desktopSubhead: { before: string; audience: string; after: string };
   desktopPrimaryCta: string;
   desktopSecondaryCta: string;
   desktopCapability: string;
+  ctaReassurance: string;
 };
   services: {
     heading: string;
@@ -195,18 +205,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Nick Sitchinava",
       ],
     },
-    loaderGreetings: [
-      "Custom websites.",
-      "Landing pages that convert.",
-      "Code that loads fast.",
-      "Built for SEO.",
-      "Clean. Fast. Found.",
-    ],
      header: {
       about: "About",
       services: "Services",
       projects: "Projects",
       contact: "Contact",
+      estimateCost: "Estimate Cost",
       cta: "Start a Project",
       menuLabel: "Menu",
     },
@@ -222,15 +226,19 @@ export const dictionaries: Record<Locale, Dictionary> = {
       primaryCta: "View Our Work",
       secondaryCta: "Start a Project",
       desktopHeadlineLines: ["We build", "Websites", "That convert"],
-      desktopSubhead:
-        "Custom websites shaped around your business, designed to earn trust and turn attention into action.",
+      desktopSubhead: {
+        before: "We build custom websites for ",
+        audience: "Service Businesses",
+        after: ", designed to earn trust and turn attention into inquiries.",
+      },
       desktopPrimaryCta: "Contact Us",
       desktopSecondaryCta: "View Our Work",
       desktopCapability: "Custom design · Hand-coded development",
+      ctaReassurance: "A rough idea is enough to start.",
     },
     services: {
       heading: "Services",
-      cta: "Learn More",
+      cta: "Start a Project",
       items: [
         {
           slug: "website-development",
@@ -278,18 +286,22 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ctaButton: "Start a Project",
     },
     projects: {
-      heading: "Projects",
-      trailHeading: "See for yourself",
+      heading: "Work shaped around the business.",
+      intro:
+        "Visual craft earns attention. Clear structure, purposeful interactions, and hand-coded performance turn that attention into action.",
+      scopeLine: "Web design · development · digital experiences",
+      wheelLabel: "Website Design Showcase",
+      browseHint: "Scroll to move through the work",
+      viewProjectLabel: "Visit site",
       problemStatement:
-        "Every business we work with has a problem a template can't fix. We dig into what's actually slowing down calls and bookings, then build the exact site that solves it.",
-      problemAttribution: "— How we approach every project",
+        "We design and develop custom, conversion-focused websites—distinctive, fast, and built for business growth.",
+      problemAttribution: "Web design · Web development · Strategy",
       showreelLabel: "Showreel",
+      showreelTitle: "Flevio in motion",
+      showreelDescription: "A compact reel of our visual and interaction work.",
+      indexHeading: "Explore Project Websites",
+      indexIntro: "Open a public project to visit its live website.",
       privateLabel: "Private project",
-      items: [
-        { title: "Project One", description: "A short description of this project goes here." },
-        { title: "Project Two", description: "A short description of this project goes here." },
-        { title: "Project Three", description: "A short description of this project goes here." },
-      ],
       deliveryLinks: [
         {
           title: "Nick Sitchinava",
@@ -298,6 +310,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "1–2 weeks",
           href: "https://nick-sitchinava.vercel.app/",
           previewSrc: "/images/previews/nick-portfolio.webp",
+          heroSrc: "/images/projects/nick-portfolio-hero.webp",
+          detailSrc: "/images/projects/nick-portfolio-detail.webp",
         },
         {
           title: "George Sitchinava",
@@ -306,6 +320,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "2–3 weeks",
           href: "https://georgesitchinava.vercel.app/",
           previewSrc: "/images/previews/george-portfolio.webp",
+          heroSrc: "/images/projects/george-portfolio-hero.webp",
+          detailSrc: "/images/projects/george-portfolio-detail.webp",
         },
         {
           title: "F-Dash",
@@ -314,6 +330,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "13–15 weeks",
           href: "https://f-dash.vercel.app/",
           previewSrc: "/images/previews/fdash.webp",
+          heroSrc: "/images/projects/fdash-hero.webp",
+          detailSrc: "/images/projects/fdash-detail.webp",
         },
         {
           title: "Bike Summer Fest",
@@ -322,23 +340,38 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "1–2 weeks",
           href: "https://bike-summer-fest.vercel.app/",
           previewSrc: "/images/previews/bike-summer-fest.webp",
+          heroSrc: "/images/projects/bike-summer-fest-hero.webp",
+          detailSrc: "/images/projects/bike-summer-fest-detail.webp",
         },
         {
           title: "Company landing page",
           description: "Marketing landing page",
           region: "Private",
           duration: "Under NDA",
-          previewSrc: "/images/previews/company-landing.webp",
+          previewSrc: "/images/projects/company-landing-hero.webp",
+          heroSrc: "/images/projects/company-landing-hero.webp",
           private: true,
+        },
+        {
+          title: "Alliance Travel Georgia",
+          description: "Georgian travel agency",
+          region: "Georgia",
+          href: "https://www.alliancetravelgeorgia.com/",
+          previewSrc: "/images/projects/alliance-travel-georgia-hero.webp",
+          heroSrc: "/images/projects/alliance-travel-georgia-hero.webp",
+          detailSrc: "/images/projects/alliance-travel-georgia-footer.webp",
         },
       ],
     },
     pricingCalculator: {
-      eyebrow: "Get an Estimate",
-      heading: "Let's talk / about your / project.",
+      heading: "Estimate your website cost and timeline.",
+      headingLead: "Estimate your website",
+      headingFocus: "cost and timeline.",
+      toolLabel: "Website cost calculator",
       subhead:
         "Most projects will be priced according to your needs, but we can still give a clear idea of timelines and budget.",
       placeholder: "Select an option",
+      navigation: { back: "Back", next: "Next", viewEstimate: "View estimate", review: "Review your choices" },
       steps: {
         projectType: {
           title: "What are you building?",
@@ -387,9 +420,11 @@ export const dictionaries: Record<Locale, Dictionary> = {
           },
         },
         seo: {
-          title: "Do you need SEO optimization?",
+          title: "Do you need SEO/GEO optimization?",
           yes: "Yes",
           no: "No",
+          yesDescription: "Include search visibility support",
+          noDescription: "Not needed for this project",
         },
         content: {
           title: "Who's providing the content?",
@@ -402,19 +437,20 @@ export const dictionaries: Record<Locale, Dictionary> = {
       result: {
         timeLabel: "Estimated development timeline",
         priceLabel: "Estimated price range",
+        startingAt: "Starting at",
+        earlyTimeLabel: "Starting timeline",
+        earlyPriceLabel: "Starting price",
         weeksUnit: "weeks",
         loadingRate: "Calculating...",
         ctaButton: "Start a Conversation",
       },
     },
     contact: {
-      eyebrow: "Get In Touch",
-      headingLead: "Let's build something",
-      headingAccent: "worth remembering.",
-      text: "Have a project in mind? Reach out through whichever channel is easiest, we usually reply within a day.",
-      statusLabel: "Available for new projects",
-      channelsEyebrow: "Reach Out Via",
-      channelsNote: "Prefer email for project inquiries, we respond fastest there.",
+      heading: "Your website\nstarts here.",
+      text: "A rough idea is enough, even if you're only exploring. Tell us what you have in mind and we'll shape the next step together.",
+      whatsappAction: "Start on WhatsApp",
+      trust: { brief: "No finished brief needed", reply: "Replies within minutes" },
+      process: { label: "After you reach out", stages: ["Share an idea", "We understand it", "Conversation begins"] },
       channels: {
         email: {
           label: "Email",
@@ -431,12 +467,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
           value: "@dev.by.nick",
           href: "https://www.instagram.com/dev.by.nick/",
         },
-      },
-      map: {
-        location: "Tbilisi, Georgia",
-        coordinates: "41.7151° N, 44.8271° E",
-        liveLabel: "Available",
-        hintLabel: "Click to expand",
       },
     },
     footer: {
@@ -489,18 +519,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
         "Nick Sitchinava",
       ],
     },
-    loaderGreetings: [
-      "ინდივიდუალური ვებსაიტები.",
-      "ლენდინგ გვერდები, რომლებიც კონვერტირებენ.",
-      "კოდი, რომელიც სწრაფად იტვირთება.",
-      "აგებულია SEO-სთვის.",
-      "სუფთა. სწრაფი. აღმოჩენადი.",
-    ],
     header: {
       about: "ჩვენ შესახებ",
       services: "სერვისები",
       projects: "პროექტები",
       contact: "კონტაქტი",
+      estimateCost: "ფასის გამომთვლელი",
       cta: "დაიწყეთ პროექტი",
       menuLabel: "მენიუ",
     },
@@ -516,15 +540,19 @@ export const dictionaries: Record<Locale, Dictionary> = {
       primaryCta: "ნახეთ ჩვენი ნამუშევრები",
       secondaryCta: "დაიწყეთ პროექტი",
       desktopHeadlineLines: ["ჩვენ ვქმნით", "ვებსაიტებს", "რომლებიც შედეგს ქმნიან"],
-      desktopSubhead:
-        "თქვენს ბიზნესზე მორგებული ინდივიდუალური ვებსაიტები, რომლებიც ნდობას აძლიერებენ და ყურადღებას მოქმედებად გარდაქმნიან.",
+      desktopSubhead: {
+        before: "ჩვენ ვქმნით ინდივიდუალურ ვებსაიტებს ",
+        audience: "სერვის ბიზნესებისთვის",
+        after: " — ნდობის გასაძლიერებლად და ინტერესის მოთხოვნად ქცევისთვის.",
+      },
       desktopPrimaryCta: "დაგვიკავშირდით",
       desktopSecondaryCta: "ნახეთ ჩვენი ნამუშევრები",
       desktopCapability: "ინდივიდუალური დიზაინი · ხელით დაწერილი კოდი",
+      ctaReassurance: "საწყისი იდეაც საკმარისია დასაწყებად.",
     },
     services: {
       heading: "სერვისები",
-      cta: "დაწვრილებით",
+      cta: "დაიწყეთ პროექტი",
       items: [
         {
           slug: "website-development",
@@ -573,18 +601,22 @@ export const dictionaries: Record<Locale, Dictionary> = {
       ctaButton: "დაიწყეთ პროექტი",
     },
     projects: {
-      heading: "პროექტები",
-      trailHeading: "ნახეთ თავად",
+      heading: "ნამუშევრები, შექმნილი ბიზნესის გარშემო.",
+      intro:
+        "ვიზუალური ოსტატობა ყურადღებას იპყრობს. მკაფიო სტრუქტურა, მიზნობრივი ინტერაქციები და ხელით დაწერილი სწრაფი კოდი ამ ყურადღებას მოქმედებად გარდაქმნის.",
+      scopeLine: "ვებდიზაინი · დეველოპმენტი · ციფრული გამოცდილება",
+      wheelLabel: "ვებსაიტების დიზაინის გალერეა",
+      browseHint: "გადაახვიეთ ნამუშევრების სანახავად",
+      viewProjectLabel: "საიტის ნახვა",
       problemStatement:
-        "ყველა ბიზნესს, რომელთანაც ვმუშაობთ, აქვს პრობლემა, რომელსაც შაბლონი ვერ გადაწყვეტს. ჩვენ ღრმად ვსწავლობთ, რა ანელებს რეალურად ზარებსა და ჯავშნებს, და შემდეგ ვქმნით ზუსტად იმ საიტს, რომელიც ამას აგვარებს.",
-      problemAttribution: "— ჩვენი მიდგომა ყველა პროექტისადმი",
+        "ვქმნით ინდივიდუალურ, კონვერსიაზე ორიენტირებულ ვებსაიტებს — გამორჩეულს, სწრაფს და ბიზნესის ზრდაზე მორგებულს.",
+      problemAttribution: "ვებდიზაინი · ვებდეველოპმენტი · სტრატეგია",
       showreelLabel: "შოურილი",
+      showreelTitle: "Flevio მოძრაობაში",
+      showreelDescription: "ჩვენი ვიზუალური და ინტერაქციული ნამუშევრების მოკლე ვიდეო.",
+      indexHeading: "პროექტების ვებსაიტები",
+      indexIntro: "გახსენით საჯარო პროექტი მისი მოქმედი საიტის სანახავად.",
       privateLabel: "პირადი პროექტი",
-      items: [
-        { title: "პროექტი პირველი", description: "ამ პროექტის მოკლე აღწერა განთავსდება აქ." },
-        { title: "პროექტი მეორე", description: "ამ პროექტის მოკლე აღწერა განთავსდება აქ." },
-        { title: "პროექტი მესამე", description: "ამ პროექტის მოკლე აღწერა განთავსდება აქ." },
-      ],
       deliveryLinks: [
         {
           title: "Nick Sitchinava",
@@ -593,6 +625,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "1–2 კვირა",
           href: "https://nick-sitchinava.vercel.app/",
           previewSrc: "/images/previews/nick-portfolio.webp",
+          heroSrc: "/images/projects/nick-portfolio-hero.webp",
+          detailSrc: "/images/projects/nick-portfolio-detail.webp",
         },
         {
           title: "George Sitchinava",
@@ -601,6 +635,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "2–3 კვირა",
           href: "https://georgesitchinava.vercel.app/",
           previewSrc: "/images/previews/george-portfolio.webp",
+          heroSrc: "/images/projects/george-portfolio-hero.webp",
+          detailSrc: "/images/projects/george-portfolio-detail.webp",
         },
         {
           title: "F-Dash",
@@ -609,6 +645,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "13–15 კვირა",
           href: "https://f-dash.vercel.app/",
           previewSrc: "/images/previews/fdash.webp",
+          heroSrc: "/images/projects/fdash-hero.webp",
+          detailSrc: "/images/projects/fdash-detail.webp",
         },
         {
           title: "Bike Summer Fest",
@@ -617,23 +655,38 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "1–2 კვირა",
           href: "https://bike-summer-fest.vercel.app/",
           previewSrc: "/images/previews/bike-summer-fest.webp",
+          heroSrc: "/images/projects/bike-summer-fest-hero.webp",
+          detailSrc: "/images/projects/bike-summer-fest-detail.webp",
         },
         {
           title: "კომპანიის ლენდინგ გვერდი",
           description: "მარკეტინგული ლენდინგ გვერდი",
           region: "პირადი",
           duration: "NDA-ს ფარგლებში",
-          previewSrc: "/images/previews/company-landing.webp",
+          previewSrc: "/images/projects/company-landing-hero.webp",
+          heroSrc: "/images/projects/company-landing-hero.webp",
           private: true,
+        },
+        {
+          title: "Alliance Travel Georgia",
+          description: "ქართული ტურისტული სააგენტო",
+          region: "საქართველო",
+          href: "https://www.alliancetravelgeorgia.com/",
+          previewSrc: "/images/projects/alliance-travel-georgia-hero.webp",
+          heroSrc: "/images/projects/alliance-travel-georgia-hero.webp",
+          detailSrc: "/images/projects/alliance-travel-georgia-footer.webp",
         },
       ],
     },
     pricingCalculator: {
-      eyebrow: "მიიღეთ შეფასება",
-      heading: "მოდით ვისაუბროთ / თქვენს / პროექტზე",
+      heading: "შეაფასეთ თქვენი ვებსაიტის ფასი და ვადები.",
+      headingLead: "შეაფასეთ თქვენი ვებსაიტის",
+      headingFocus: "ფასი და ვადები.",
+      toolLabel: "ვებსაიტის ფასის კალკულატორი",
       subhead:
         "პროექტების უმეტესობის ფასი განისაზღვრება ინდივიდუალურად, თუმცა შეგვიძლია მოგცეთ ნათელი წარმოდგენა ვადებსა და ბიუჯეტზე.",
       placeholder: "აირჩიეთ ვარიანტი",
+      navigation: { back: "უკან", next: "შემდეგი", viewEstimate: "შეფასების ნახვა", review: "არჩეული პასუხების ნახვა" },
       steps: {
         projectType: {
           title: "რას ქმნით?",
@@ -682,9 +735,11 @@ export const dictionaries: Record<Locale, Dictionary> = {
           },
         },
         seo: {
-          title: "გჭირდებათ SEO ოპტიმიზაცია?",
+          title: "გჭირდებათ SEO/GEO ოპტიმიზაცია?",
           yes: "დიახ",
           no: "არა",
+          yesDescription: "საძიებო ხილვადობის მხარდაჭერით",
+          noDescription: "ამ პროექტისთვის არ მჭირდება",
         },
         content: {
           title: "ვინ უზრუნველყოფს კონტენტს?",
@@ -697,19 +752,20 @@ export const dictionaries: Record<Locale, Dictionary> = {
       result: {
         timeLabel: "სავარაუდო შესრულების ვადა",
         priceLabel: "სავარაუდო ფასის დიაპაზონი",
+        startingAt: "საწყისი ფასი",
+        earlyTimeLabel: "საწყისი ვადა",
+        earlyPriceLabel: "საწყისი ფასი",
         weeksUnit: "კვირა",
         loadingRate: "მიმდინარეობს გამოთვლა...",
         ctaButton: "დაიწყეთ საუბარი",
       },
     },
     contact: {
-      eyebrow: "დაგვიკავშირდით",
-      headingLead: "მოდით შევქმნათ რაღაც",
-      headingAccent: "დასამახსოვრებელი.",
-      text: "გაქვთ პროექტის იდეა? დაგვიკავშირდით ნებისმიერი მოსახერხებელი არხით, ჩვეულებრივ ერთი დღის განმავლობაში ვპასუხობთ.",
-      statusLabel: "ხელმისაწვდომია ახალი პროექტებისთვის",
-      channelsEyebrow: "დაგვიკავშირდით",
-      channelsNote: "პროექტის შესახებ შეკითხვებისთვის გირჩევთ ელფოსტას, იქ ყველაზე სწრაფად ვპასუხობთ.",
+      heading: "თქვენი ვებსაიტი\nაქ იწყება.",
+      text: "საწყისი იდეაც საკმარისია, მაშინაც კი, თუ ჯერ მხოლოდ ვარიანტებს განიხილავთ. მოგვწერეთ და ერთად განვსაზღვროთ შემდეგი ნაბიჯი.",
+      whatsappAction: "დავიწყოთ WhatsApp-ზე",
+      trust: { brief: "მზა ბრიფი საჭირო არ არის", reply: "გიპასუხებთ რამდენიმე წუთში" },
+      process: { label: "მოწერის შემდეგ", stages: ["გაგვიზიარეთ იდეა", "გავერკვევით დეტალებში", "საუბარს დავიწყებთ"] },
       channels: {
         email: {
           label: "ელფოსტა",
@@ -726,12 +782,6 @@ export const dictionaries: Record<Locale, Dictionary> = {
           value: "@dev.by.nick",
           href: "https://www.instagram.com/dev.by.nick/",
         },
-      },
-      map: {
-        location: "თბილისი, საქართველო",
-        coordinates: "41.7151° N, 44.8271° E",
-        liveLabel: "ხელმისაწვდომი",
-        hintLabel: "დააჭირეთ გასაშლელად",
       },
     },
     footer: {

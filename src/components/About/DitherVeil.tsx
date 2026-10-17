@@ -24,6 +24,7 @@ export interface DitherVeilProps {
   contrast?: number;
   brightness?: number;
   revealRadius?: number;
+  mobileTouchRadius?: number;
   softness?: number;
   linger?: number;
   rimColor?: string;
@@ -420,6 +421,7 @@ const DitherVeil = ({
   contrast = 1.15,
   brightness = 0,
   revealRadius = 200,
+  mobileTouchRadius = 180,
   softness = 0.6,
   linger = 1,
   rimColor = '#a78bfa',
@@ -446,6 +448,7 @@ const DitherVeil = ({
       contrast,
       brightness,
       revealRadius,
+      mobileTouchRadius,
       softness,
       linger,
       rimColor,
@@ -562,7 +565,8 @@ const DitherVeil = ({
     let trailUntil = 0;
     let presence = 0;
     let drift = 0;
-    const pointer = { x: 0, y: 0, inside: false, fresh: true, placed: false };
+    const pointer = { x: 0, y: 0, inside: false, fresh: true, placed: false, touch: false };
+    const mobileInteractionQuery = window.matchMedia('(max-width: 820px), (max-width: 1023px) and (max-height: 520px) and (orientation: landscape)');
     const brush = { x: 0, y: 0, px: 0, py: 0 };
     const bursts: { x: number; y: number; start: number }[] = [];
 
@@ -696,7 +700,8 @@ const DitherVeil = ({
       maskUniforms.tPrev.value = masks[0].texture;
       maskUniforms.uFrom.value = [brush.px, brush.py];
       maskUniforms.uTo.value = [brush.x, brush.y];
-      maskUniforms.uRadius.value = s.revealRadius * (0.45 + 0.55 * presence);
+      const influenceRadius = mobileInteractionQuery.matches && pointer.touch ? s.mobileTouchRadius : s.revealRadius;
+      maskUniforms.uRadius.value = influenceRadius * (0.45 + 0.55 * presence);
       maskUniforms.uSoftness.value = s.softness;
       maskUniforms.uStrength.value = presence;
       maskUniforms.uFade.value = Math.max(fade, minFade);
@@ -791,6 +796,7 @@ const DitherVeil = ({
     };
     const onMove = (e: PointerEvent) => {
       locate(e);
+      pointer.touch = e.pointerType === 'touch';
       if (!pointer.inside) {
         pointer.inside = true;
         pointer.fresh = true;

@@ -1,0 +1,36 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.band {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 500ms ease;
+}
+
+.tile {
+  position: absolute;
+}
+
+.slice {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  background: #e2dfd5;
+}
+
+.firstSlice { border-radius: 7px 0 0 7px; }
+.lastSlice { border-radius: 0 7px 7px 0; }
+
+.image {
+  position: absolute;
+  top: 0;
+  max-width: none;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .band { transition: none; }
+}

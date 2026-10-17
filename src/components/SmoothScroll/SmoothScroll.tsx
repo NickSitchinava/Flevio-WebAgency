@@ -25,9 +25,11 @@ export default function SmoothScroll() {
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const updateLenis = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
+
+    gsap.ticker.add(updateLenis);
     gsap.ticker.lagSmoothing(0);
 
     const isHashLink = (anchor: HTMLAnchorElement) => {
@@ -62,10 +64,9 @@ export default function SmoothScroll() {
 
     return () => {
       document.removeEventListener("click", handleClick);
+      lenis.off("scroll", ScrollTrigger.update);
+      gsap.ticker.remove(updateLenis);
       lenis.destroy();
-      gsap.ticker.remove((time) => {
-        lenis.raf(time * 1000);
-      });
     };
   }, []);
 

@@ -323,7 +323,9 @@ export default function Footer({ locale }: { locale: Locale }) {
 
           <div className={styles.bottomBar}>
             <p className={styles.copyright}>
-              &copy; {year} Nick Sitchinava. {t.rights}
+              <span className={styles.footerBrand}>FLEVIO</span>
+              <span className={styles.copyrightSeparator} aria-hidden="true">·</span>
+              <span>&copy; {year} Nick Sitchinava. {t.rights}</span>
             </p>
 
             <div className={styles.craftedBadge}>
