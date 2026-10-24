@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { locales, type Locale } from "@/i18n/config";
+import { SITE_URL } from "@/lib/site-url";
 import styles from "./legal.module.css";
 
-const SITE_URL = "https://nicksitchinava.dev";
 const documents = ["privacy", "terms"] as const;
 type Document = (typeof documents)[number];
 
@@ -79,11 +79,31 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale, document } = await params;
   if (!locales.includes(locale as Locale) || !documents.includes(document as Document)) return {};
   const title = copy[locale as Locale][document as Document].title;
+  const description = copy[locale as Locale][document as Document].introduction;
+  const canonicalUrl = `${SITE_URL}/${locale}/legal/${document}`;
   return {
     title: `${title} | Flevio`,
+    description,
     alternates: {
-      canonical: `${SITE_URL}/${locale}/legal/${document}`,
-      languages: Object.fromEntries(locales.map((language) => [language, `${SITE_URL}/${language}/legal/${document}`])),
+      canonical: canonicalUrl,
+      languages: {
+        ...Object.fromEntries(locales.map((language) => [language, `${SITE_URL}/${language}/legal/${document}`])),
+        "x-default": `${SITE_URL}/en/legal/${document}`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: canonicalUrl,
+      title: `${title} | Flevio`,
+      description,
+      locale: locale === "ka" ? "ka_GE" : "en_US",
+      images: [{ url: `${SITE_URL}/images/logo.webp`, width: 1024, height: 1024, alt: "Flevio" }],
+    },
+    twitter: {
+      card: "summary",
+      title: `${title} | Flevio`,
+      description,
+      images: [`${SITE_URL}/images/logo.webp`],
     },
   };
 }

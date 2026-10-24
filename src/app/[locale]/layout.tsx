@@ -3,6 +3,7 @@ import { Inter, Playfair_Display, Poppins, Roboto } from "next/font/google";
 import { ArcRevealHero } from "@/components/ArcRevealHero/ArcRevealHero";
 import { locales, defaultLocale, type Locale } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
+import { SITE_URL } from "@/lib/site-url";
 import SmoothScroll from "@/components/SmoothScroll/SmoothScroll";
 import "../globals.css";
 
@@ -32,8 +33,6 @@ const roboto = Roboto({
   display: "swap",
 });
 
-const SITE_URL = "https://nicksitchinava.dev";
-
 function resolveLocale(value: string): Locale {
   return locales.includes(value as Locale) ? (value as Locale) : defaultLocale;
 }
@@ -53,6 +52,9 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(SITE_URL),
+    icons: {
+      icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
+    },
     title: t.title,
     description: t.description,
     keywords: t.keywords,
@@ -70,6 +72,13 @@ export async function generateMetadata({
       title: t.title,
       description: t.ogDescription,
       locale: locale === "ka" ? "ka_GE" : "en_US",
+      images: [{ url: `${SITE_URL}/images/logo.webp`, width: 1024, height: 1024, alt: "Flevio" }],
+    },
+    twitter: {
+      card: "summary",
+      title: t.title,
+      description: t.ogDescription,
+      images: [`${SITE_URL}/images/logo.webp`],
     },
   };
 }

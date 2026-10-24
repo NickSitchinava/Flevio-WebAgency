@@ -6,9 +6,8 @@ import Footer from "@/components/Footer/Footer";
 import { Button } from "@/components/ui/Button/Button";
 import { locales, defaultLocale, type Locale } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
+import { SITE_URL } from "@/lib/site-url";
 import styles from "./service-detail.module.css";
-
-const SITE_URL = "https://nicksitchinava.dev";
 
 function resolveLocale(value: string): Locale {
   return locales.includes(value as Locale) ? (value as Locale) : defaultLocale;
@@ -40,7 +39,7 @@ export async function generateMetadata({
 
   return {
     title: `${service.title} | Flevio`,
-    description: service.description,
+    description: service.metaDescription,
     alternates: {
       canonical: canonicalUrl,
       languages: {
@@ -54,8 +53,15 @@ export async function generateMetadata({
       type: "website",
       url: canonicalUrl,
       title: `${service.title} | Flevio`,
-      description: service.description,
+      description: service.metaDescription,
       locale: locale === "ka" ? "ka_GE" : "en_US",
+      images: [{ url: `${SITE_URL}/images/logo.webp`, width: 1024, height: 1024, alt: "Flevio" }],
+    },
+    twitter: {
+      card: "summary",
+      title: `${service.title} | Flevio`,
+      description: service.metaDescription,
+      images: [`${SITE_URL}/images/logo.webp`],
     },
   };
 }
@@ -78,7 +84,7 @@ export default async function ServiceDetailPage({
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.title,
-    description: service.description,
+    description: service.details,
     provider: {
       "@type": "ProfessionalService",
       name: "Flevio",

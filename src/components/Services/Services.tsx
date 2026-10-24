@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/Button/Button";
 import { ServicesVideo } from "./ServicesVideo";
 import { dictionaries } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
+import { SITE_URL } from "@/lib/site-url";
 import styles from "./services.module.css";
 
 if (typeof window !== "undefined") {
@@ -441,7 +442,7 @@ export default function Services({ locale }: { locale: Locale }) {
       position: index + 1,
       name: service.title,
       description: service.description,
-      url: `https://nicksitchinava.dev/${locale}/services/${service.slug}`,
+      url: `${SITE_URL}/${locale}/services/${service.slug}`,
     })),
   };
 

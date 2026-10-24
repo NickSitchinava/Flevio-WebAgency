@@ -12,7 +12,17 @@ import styles from "./footer.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const FINE_POINTER_QUERY = "(hover: hover) and (pointer: fine)";
+
+function subscribeToFinePointer(callback: () => void) {
+  const query = window.matchMedia(FINE_POINTER_QUERY);
+  query.addEventListener("change", callback);
+  return () => query.removeEventListener("change", callback);
+}
+
+function getFinePointerSnapshot() {
+  return window.matchMedia(FINE_POINTER_QUERY).matches;
+}
 
 function MagneticPill({
   href,
@@ -105,7 +115,7 @@ export default function Footer({ locale }: { locale: Locale }) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [pointerFine, setPointerFine] = useState(false);
+  const pointerFine = React.useSyncExternalStore(subscribeToFinePointer, getFinePointerSnapshot, () => false);
   const [inView, setInView] = useState(false);
   const year = new Date().getFullYear();
   const t = dictionaries[locale].footer;
@@ -116,10 +126,6 @@ export default function Footer({ locale }: { locale: Locale }) {
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
-  }, []);
-
-  React.useEffect(() => {
-    setPointerFine(window.matchMedia("(hover: hover) and (pointer: fine)").matches);
   }, []);
 
   React.useEffect(() => {

@@ -57,6 +57,7 @@ export interface ServiceItem {
   slug: string;
   title: string;
   description: string;
+  metaDescription: string;
   details: string;
   features: string[];
 }
@@ -244,6 +245,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           slug: "website-development",
           title: "Website Development",
           description: "Custom-built websites, designed and coded from scratch.",
+          metaDescription: "Flevio designs and hand-codes custom websites with maintainable code, purposeful motion, fast loading, and search-friendly structure.",
           details:
             "We design and hand-code every site to fit your business, no page builders, no bloated templates. Every layout, animation, and line of code exists for a reason: to load fast, look sharp, and turn visitors into calls.",
           features: [
@@ -256,6 +258,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           slug: "landing-pages",
           title: "Landing Pages",
           description: "High-converting landing pages built for speed and clarity.",
+          metaDescription: "Flevio builds fast, mobile-first landing pages around one clear action, with focused layouts designed to turn visitors into inquiries.",
           details:
             "A landing page has one job: convert. We strip away distractions and structure every section around a single, clear action, so visitors know exactly what to do next.",
           features: [
@@ -268,8 +271,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
           slug: "seo-optimization",
           title: "SEO Optimization",
           description: "Clean, search-friendly code structured to rank well.",
+          metaDescription: "Flevio combines semantic markup, structured data, Core Web Vitals optimization, and GEO to help search and AI systems understand your site.",
           details:
-            "Good SEO starts in the code, not after launch. We build every site with semantic markup, structured data, and performance baked in, so search engines and visitors both find what they need.",
+            "Good SEO starts in the code, not after launch. We build every site with semantic markup, structured data, and performance baked in, so search engines and visitors both find what they need. Our optimization also includes GEO to help AI search systems understand the content.",
           features: [
             "Semantic, accessible markup",
             "Structured data and schema.org",
@@ -558,6 +562,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           slug: "website-development",
           title: "ვებსაიტის დეველოპმენტი",
           description: "ინდივიდუალურად აგებული ვებსაიტები, დაპროექტებული და კოდირებული ნულიდან.",
+          metaDescription: "Flevio ქმნის ინდივიდუალურ ვებსაიტებს ხელით დაწერილი კოდით, მიზნობრივი ანიმაციით, სწრაფი ჩატვირთვით და საძიებო სისტემებისთვის გასაგები სტრუქტურით.",
           details:
             "ჩვენ თითოეულ საიტს ვქმნით და ვწერთ ხელით თქვენი ბიზნესის შესაბამისად, არანაირი მზა შაბლონი და ზედმეტად დატვირთული კონსტრუქტორი. ყოველი განლაგება, ანიმაცია და კოდის სტრიქონი ემსახურება ერთ მიზანს: სწრაფად ჩაიტვირთოს, კარგად გამოიყურებოდეს და ვიზიტორი კლიენტად აქციოს.",
           features: [
@@ -570,6 +575,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           slug: "landing-pages",
           title: "ლენდინგ გვერდები",
           description: "მაღალკონვერტირებადი ლენდინგ გვერდები, აგებული სისწრაფისა და სიცხადისთვის.",
+          metaDescription: "Flevio ქმნის სწრაფ, მობილურზე მორგებულ ლენდინგ გვერდებს ერთი მკაფიო მოქმედების გარშემო, რათა ვიზიტორებს დაკავშირება გაუადვილდეთ.",
           details:
             "ლენდინგ გვერდს ერთი ამოცანა აქვს: კონვერტაცია. ჩვენ ვხსნით ყველა ზედმეტ დეტალს და ვაწყობთ თითოეულ სექციას ერთი, მკაფიო მოქმედების გარშემო, რათა ვიზიტორმა ზუსტად იცოდეს, რა უნდა გააკეთოს შემდეგ.",
           features: [
@@ -583,8 +589,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
           title: "SEO ოპტიმიზაცია",
           description:
             "სუფთა, საძიებო სისტემებისთვის მოსახერხებელი კოდი, სტრუქტურირებული მაღალი პოზიციებისთვის.",
+          metaDescription: "Flevio აერთიანებს სემანტიკურ მარკაპს, სტრუქტურირებულ მონაცემებს, Core Web Vitals-ის ოპტიმიზაციასა და GEO-ს საიტის უკეთ გასაგებად.",
           details:
-            "კარგი SEO იწყება კოდიდან და არა გაშვების შემდეგ. ჩვენ ვაგებთ თითოეულ საიტს სემანტიკური მარკაპით, სტრუქტურირებული მონაცემებით და გამართული წარმადობით, რათა საძიებო სისტემებმაც და ვიზიტორებმაც იპოვონ ის, რაც სჭირდებათ.",
+            "კარგი SEO იწყება კოდიდან და არა გაშვების შემდეგ. ჩვენ ვაგებთ თითოეულ საიტს სემანტიკური მარკაპით, სტრუქტურირებული მონაცემებით და გამართული წარმადობით, რათა საძიებო სისტემებმაც და ვიზიტორებმაც იპოვონ ის, რაც სჭირდებათ. ოპტიმიზაცია ასევე მოიცავს GEO-ს, რათა AI საძიებო სისტემებმა უკეთ გაიგონ კონტენტი.",
           features: [
             "სემანტიკური, ხელმისაწვდომი მარკაპი",
             "სტრუქტურირებული მონაცემები და schema.org",

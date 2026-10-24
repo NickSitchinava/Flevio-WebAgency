@@ -49,3 +49,4 @@ graphify-out/
 
 # Local reference inspection files
 .reference/
+.seo-cache/
