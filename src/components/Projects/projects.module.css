@@ -111,7 +111,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  min-height: 11.5rem;
+  min-height: 10.5rem;
   padding: 0.9rem 1rem;
   border: 1px solid rgb(21 20 18 / 0.13);
   border-radius: 1rem;
@@ -127,10 +127,9 @@ a.projectCard:focus-visible { outline: 3px solid var(--red); outline-offset: 3px
 a.projectCard:hover .cardTopline svg, a.projectCard:focus-visible .cardTopline svg { transform: translate(3px, -3px); }
 .cardNumber { font: 700 0.69rem/1.2 var(--font-body); letter-spacing: 0.055em; font-variant-numeric: tabular-nums; text-transform: uppercase; }
 .featuredLabel { letter-spacing: 0.07em; }
-.cardTitle { display: block; margin-top: 0.7rem; font: 700 clamp(1.05rem, 1.45vw, 1.35rem)/1.1 var(--font-headline); letter-spacing: -0.025em; text-wrap: balance; }
-.cardCategory { display: block; margin-top: 0.35rem; color: var(--red); font: 700 0.7rem/1.35 var(--font-body); letter-spacing: 0.025em; text-transform: uppercase; }
-.cardDescription { display: block; max-width: 30ch; margin-top: 0.45rem; color: var(--muted); font: 500 0.8rem/1.4 var(--font-body); }
-.cardBottomline { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.45rem; }
+.cardTitle { display: block; margin-top: 0.45rem; font: 700 clamp(1.05rem, 1.45vw, 1.35rem)/1.1 var(--font-headline); letter-spacing: -0.025em; text-wrap: balance; }
+.cardCategory { display: block; margin-top: auto; padding-top: 0.55rem; color: var(--red); font: 700 0.7rem/1.35 var(--font-body); letter-spacing: 0.025em; text-transform: uppercase; }
+.cardBottomline { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 0.35rem; padding-top: 0.75rem; }
 .cardMeta { display: flex; flex-wrap: wrap; gap: 0.35rem; min-width: 0; }
 .cardMeta span { display: inline-flex; align-items: center; min-height: 1.55rem; padding: 0.2rem 0.5rem; border: 1px solid rgb(21 20 18 / 0.14); border-radius: 99px; color: var(--muted); font: 550 0.68rem/1.15 var(--font-body); white-space: nowrap; }
 .cardAction { display: inline-flex; align-items: center; justify-content: flex-end; gap: 0.15rem; flex: 0 0 auto; color: var(--ink); font: 700 0.72rem/1.2 var(--font-body); text-align: right; white-space: nowrap; }
@@ -138,11 +137,14 @@ a.projectCard:hover .cardTopline svg, a.projectCard:focus-visible .cardTopline s
 .featuredCard { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 a.featuredCard:hover { background: #221f1c; border-color: var(--red); }
 .featuredCard .cardTopline, .featuredCard .cardCategory, .featuredCard .cardAction svg { color: #ff7771; }
-.featuredCard .cardDescription { color: #d5d1c9; }
 .featuredCard .cardMeta span { border-color: rgb(239 237 230 / 0.3); color: #e3e0d9; }
 .featuredCard .cardAction { color: var(--paper); }
 .privateCard { border-style: dashed; background: transparent; cursor: default; }
-.privateCard .cardTopline, .privateCard .cardCategory { color: var(--muted); }
+.privateCard .cardMeta span:first-child { border-color: rgb(205 0 0 / 0.3); color: var(--red); }
+
+@media (min-width: 761px) {
+  .projects[lang="ka"] .privateCard .cardMeta span { padding-inline: 0.35rem; font-size: 0.64rem; }
+}
 
 .mobileProjectCard,
 .fdashMobileLead,
@@ -192,9 +194,8 @@ a.featuredCard:hover { background: #221f1c; border-color: var(--red); }
   .desktopIndexIntro { display: none; }
   .mobileIndexIntro { display: inline; }
   .cards { grid-template-columns: 1fr; }
-  .projectCard { min-height: 9.5rem; padding: 0.85rem 0.95rem; }
-  .cardTitle { margin-top: 0.55rem; }
-  .cardDescription { margin-top: 0.35rem; }
+  .projectCard { min-height: 8.75rem; padding: 0.85rem 0.95rem; }
+  .cardTitle { margin-top: 0.35rem; }
   .desktopProjectCard { display: none; }
   .mobileProjectCard { display: flex; width: 100%; appearance: none; text-align: left; cursor: pointer; }
   .mobileProjectCard:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
@@ -227,12 +228,11 @@ a.featuredCard:hover { background: #221f1c; border-color: var(--red); }
 }
 
 @media (max-width: 500px) {
-  .projectCard { min-height: 9.5rem; padding: 0.85rem 0.95rem; }
+  .projectCard { min-height: 8.75rem; padding: 0.85rem 0.95rem; }
   .cardTitle { font-size: clamp(1.2rem, 5vw, 1.45rem); }
 }
 
 @media (max-width: 400px) {
-  .cardDescription { font-size: 0.8rem; }
   .fdashMobileAfter { display: grid; gap: 0.45rem; }
 }
 

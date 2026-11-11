@@ -46,9 +46,9 @@ Flevio combines business understanding with fully custom design and hand-coded d
 
 ## Evidence on Hand
 
-- Project previews and detail imagery are stored under `public/images/projects/` and `public/images/previews/`.
-- Existing public work includes the Nick Sitchinava portfolio, George Sitchinava portfolio, F-Dash finance dashboard, and Bike Summer Fest landing page.
-- A private company landing-page project is represented without a public destination.
+- Project previews are stored under `public/images/previews/`; the selected-work gallery screenshots are stored under `public/images/gallery/`.
+- Public project links include the Nick Sitchinava portfolio, George Sitchinava portfolio, Bike Summer Fest landing page, and Alliance Travel Georgia.
+- F-Dash is featured in the showreel, but its project card is private and has no public destination.
 - Showreel assets are stored under `public/videos/`.
 - Existing logo and hero assets are stored under `public/images/`.
 - No testimonials, case-study metrics, named client endorsements, or independently verified performance claims are currently present and they must not be invented.

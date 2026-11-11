@@ -108,9 +108,8 @@ export interface ProjectsDeliveryLink {
   region: string;
   duration?: string;
   href?: string;
-  previewSrc: string;
-  heroSrc: string;
-  detailSrc?: string;
+  previewSrc?: string;
+  gallerySrcs: string[];
   private?: boolean;
 }
 
@@ -309,13 +308,17 @@ export const dictionaries: Record<Locale, Dictionary> = {
       deliveryLinks: [
         {
           title: "Nick Sitchinava",
-          description: "Personal portfolio site",
+          description: "Personal Portfolio Site",
           region: "Georgia",
           duration: "1–2 weeks",
-          href: "https://nick-sitchinava.vercel.app/",
-          previewSrc: "/images/previews/nick-portfolio.webp",
-          heroSrc: "/images/projects/nick-portfolio-hero.webp",
-          detailSrc: "/images/projects/nick-portfolio-detail.webp",
+          href: "https://nick-sitchinava-portfolio.vercel.app/",
+          previewSrc: "/images/previews/nick-portfolio-home.webp",
+          gallerySrcs: [
+            "/images/gallery/nick-creative.webp",
+            "/images/gallery/nick-home.webp",
+            "/images/gallery/nick-expertise.webp",
+            "/images/gallery/nick-footer.webp",
+          ],
         },
         {
           title: "George Sitchinava",
@@ -324,36 +327,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "2–3 weeks",
           href: "https://georgesitchinava.vercel.app/",
           previewSrc: "/images/previews/george-portfolio.webp",
-          heroSrc: "/images/projects/george-portfolio-hero.webp",
-          detailSrc: "/images/projects/george-portfolio-detail.webp",
-        },
-        {
-          title: "F-Dash",
-          description: "Finance dashboard",
-          region: "Europe",
-          duration: "13–15 weeks",
-          href: "https://f-dash.vercel.app/",
-          previewSrc: "/images/previews/fdash.webp",
-          heroSrc: "/images/projects/fdash-hero.webp",
-          detailSrc: "/images/projects/fdash-detail.webp",
+          gallerySrcs: [
+            "/images/gallery/george-home.webp",
+            "/images/gallery/george-gallery.webp",
+            "/images/gallery/george-contact.webp",
+          ],
         },
         {
           title: "Bike Summer Fest",
           description: "Event landing page",
           region: "Georgia",
           duration: "1–2 weeks",
-          href: "https://bike-summer-fest.vercel.app/",
+          href: "https://summerfest2.vercel.app/",
           previewSrc: "/images/previews/bike-summer-fest.webp",
-          heroSrc: "/images/projects/bike-summer-fest-hero.webp",
-          detailSrc: "/images/projects/bike-summer-fest-detail.webp",
+          gallerySrcs: ["/images/gallery/bike-home.webp"],
         },
         {
-          title: "Company landing page",
-          description: "Marketing landing page",
-          region: "Private",
-          duration: "Under NDA",
-          previewSrc: "/images/projects/company-landing-hero.webp",
-          heroSrc: "/images/projects/company-landing-hero.webp",
+          title: "F-Dash",
+          description: "Finance dashboard",
+          region: "Private project",
+          duration: "13–15 weeks",
+          gallerySrcs: [],
           private: true,
         },
         {
@@ -361,9 +355,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
           description: "Georgian travel agency",
           region: "Georgia",
           href: "https://www.alliancetravelgeorgia.com/",
-          previewSrc: "/images/projects/alliance-travel-georgia-hero.webp",
-          heroSrc: "/images/projects/alliance-travel-georgia-hero.webp",
-          detailSrc: "/images/projects/alliance-travel-georgia-footer.webp",
+          previewSrc: "/images/previews/alliance-travel-georgia.webp",
+          gallerySrcs: [
+            "/images/gallery/alliance-home.webp",
+            "/images/gallery/alliance-gallery.webp",
+            "/images/gallery/alliance-contact.webp",
+          ],
         },
       ],
     },
@@ -630,10 +627,14 @@ export const dictionaries: Record<Locale, Dictionary> = {
           description: "პერსონალური პორტფოლიო საიტი",
           region: "საქართველო",
           duration: "1–2 კვირა",
-          href: "https://nick-sitchinava.vercel.app/",
-          previewSrc: "/images/previews/nick-portfolio.webp",
-          heroSrc: "/images/projects/nick-portfolio-hero.webp",
-          detailSrc: "/images/projects/nick-portfolio-detail.webp",
+          href: "https://nick-sitchinava-portfolio.vercel.app/",
+          previewSrc: "/images/previews/nick-portfolio-home.webp",
+          gallerySrcs: [
+            "/images/gallery/nick-creative.webp",
+            "/images/gallery/nick-home.webp",
+            "/images/gallery/nick-expertise.webp",
+            "/images/gallery/nick-footer.webp",
+          ],
         },
         {
           title: "George Sitchinava",
@@ -642,36 +643,27 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "2–3 კვირა",
           href: "https://georgesitchinava.vercel.app/",
           previewSrc: "/images/previews/george-portfolio.webp",
-          heroSrc: "/images/projects/george-portfolio-hero.webp",
-          detailSrc: "/images/projects/george-portfolio-detail.webp",
-        },
-        {
-          title: "F-Dash",
-          description: "ფინანსური დაფა",
-          region: "ევროპა",
-          duration: "13–15 კვირა",
-          href: "https://f-dash.vercel.app/",
-          previewSrc: "/images/previews/fdash.webp",
-          heroSrc: "/images/projects/fdash-hero.webp",
-          detailSrc: "/images/projects/fdash-detail.webp",
+          gallerySrcs: [
+            "/images/gallery/george-home.webp",
+            "/images/gallery/george-gallery.webp",
+            "/images/gallery/george-contact.webp",
+          ],
         },
         {
           title: "Bike Summer Fest",
           description: "ივენთის ლენდინგ გვერდი",
           region: "საქართველო",
           duration: "1–2 კვირა",
-          href: "https://bike-summer-fest.vercel.app/",
+          href: "https://summerfest2.vercel.app/",
           previewSrc: "/images/previews/bike-summer-fest.webp",
-          heroSrc: "/images/projects/bike-summer-fest-hero.webp",
-          detailSrc: "/images/projects/bike-summer-fest-detail.webp",
+          gallerySrcs: ["/images/gallery/bike-home.webp"],
         },
         {
-          title: "კომპანიის ლენდინგ გვერდი",
-          description: "მარკეტინგული ლენდინგ გვერდი",
-          region: "პირადი",
-          duration: "NDA-ს ფარგლებში",
-          previewSrc: "/images/projects/company-landing-hero.webp",
-          heroSrc: "/images/projects/company-landing-hero.webp",
+          title: "F-Dash",
+          description: "ფინანსური დაფა",
+          region: "პირადი პროექტი",
+          duration: "13–15 კვირა",
+          gallerySrcs: [],
           private: true,
         },
         {
@@ -679,9 +671,12 @@ export const dictionaries: Record<Locale, Dictionary> = {
           description: "ქართული ტურისტული სააგენტო",
           region: "საქართველო",
           href: "https://www.alliancetravelgeorgia.com/",
-          previewSrc: "/images/projects/alliance-travel-georgia-hero.webp",
-          heroSrc: "/images/projects/alliance-travel-georgia-hero.webp",
-          detailSrc: "/images/projects/alliance-travel-georgia-footer.webp",
+          previewSrc: "/images/previews/alliance-travel-georgia.webp",
+          gallerySrcs: [
+            "/images/gallery/alliance-home.webp",
+            "/images/gallery/alliance-gallery.webp",
+            "/images/gallery/alliance-contact.webp",
+          ],
         },
       ],
     },

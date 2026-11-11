@@ -12,9 +12,25 @@ import styles from "./projects.module.css";
 
 type Project = (typeof dictionaries)[Locale]["projects"]["deliveryLinks"][number];
 
-const previewSources: Record<string, string> = {
-  "/images/projects/alliance-travel-georgia-hero.webp": "/images/previews/alliance-travel-georgia.webp",
-};
+const GALLERY_IMAGE_ORDER = [
+  "/images/gallery/alliance-home.webp",
+  "/images/gallery/nick-expertise.webp",
+  "/images/gallery/george-contact.webp",
+  "/images/gallery/nick-home.webp",
+  "/images/gallery/bike-home.webp",
+  "/images/gallery/alliance-gallery.webp",
+  "/images/gallery/nick-creative.webp",
+  "/images/gallery/george-home.webp",
+  "/images/gallery/alliance-contact.webp",
+  "/images/gallery/george-gallery.webp",
+  "/images/gallery/nick-footer.webp",
+];
+
+function getPreviewSrc(project: Project) {
+  const src = project.previewSrc ?? project.gallerySrcs[0];
+  if (!src) throw new Error(`Missing preview image for ${project.title}`);
+  return src;
+}
 
 // Keep the supplied card-to-card image motion and its exact easing and durations.
 const PREVIEW_KEYFRAMES = `
@@ -41,42 +57,6 @@ const subscribeViewportWidth = (onChange: () => void) => {
 const getViewportWidth = () => window.innerWidth;
 const getServerViewportWidth = () => 1200;
 
-// Gallery-only versions keep the supplied animation crisp at its rendered size
-// without decoding ten full-size project screenshots into moving layers.
-const gallerySources: Record<string, string> = Object.fromEntries(
-  [
-    "alliance-travel-georgia-hero.webp",
-    "alliance-travel-georgia-footer.webp",
-    "nick-portfolio-hero.webp",
-    "nick-portfolio-detail.webp",
-    "george-portfolio-hero.webp",
-    "george-portfolio-detail.webp",
-    "fdash-hero.webp",
-    "fdash-detail.webp",
-    "bike-summer-fest-hero.webp",
-    "bike-summer-fest-detail.webp",
-  ].map((name) => [`/images/projects/${name}`, `/images/gallery/${name}`]),
-);
-
-const descriptions: Record<Locale, Record<string, string>> = {
-  en: {
-    "Alliance Travel Georgia": "Discover and plan travel across Georgia.",
-    "Nick Sitchinava": "Selected work presented with a personal voice.",
-    "George Sitchinava": "A focused showcase for projects and process.",
-    "F-Dash": "Complex finance information, clearly organized.",
-    "Bike Summer Fest": "Festival discovery and details in one place.",
-    "Company landing page": "A marketing presence for a private company.",
-  },
-  ka: {
-    "Alliance Travel Georgia": "აღმოაჩინეთ საქართველო და დაგეგმეთ მოგზაურობა.",
-    "Nick Sitchinava": "რჩეული ნამუშევრები პერსონალური ხედვით.",
-    "George Sitchinava": "პროექტებისა და სამუშაო პროცესის მკაფიო პორტფოლიო.",
-    "F-Dash": "კომპლექსური ფინანსური ინფორმაცია გასაგებად.",
-    "Bike Summer Fest": "ფესტივალის ამბები და დეტალები ერთ გვერდზე.",
-    "კომპანიის ლენდინგ გვერდი": "კერძო კომპანიის მარკეტინგული ვებგვერდი.",
-  },
-};
-
 function ProjectCard({ project, index, locale, viewLabel, privateLabel, onEnter }: {
   project: Project;
   index: number;
@@ -86,7 +66,6 @@ function ProjectCard({ project, index, locale, viewLabel, privateLabel, onEnter 
   onEnter: (index: number, link: HTMLAnchorElement) => void;
 }) {
   const featured = index === 0;
-  const summary = descriptions[locale][project.title] ?? project.description;
   const className = `${styles.projectCard} ${featured ? styles.featuredCard : ""} ${project.private ? styles.privateCard : ""}`;
   const content = (mobile = false) => (
     <>
@@ -96,7 +75,6 @@ function ProjectCard({ project, index, locale, viewLabel, privateLabel, onEnter 
       </span>
       <strong className={styles.cardTitle}>{project.title}</strong>
       <span className={styles.cardCategory}>{project.description}</span>
-      <span className={styles.cardDescription}>{summary}</span>
       <span className={styles.cardBottomline}>
         <span className={styles.cardMeta}>
           <span>{project.region}</span>
@@ -119,7 +97,7 @@ function ProjectCard({ project, index, locale, viewLabel, privateLabel, onEnter 
         index={index}
         locale={locale}
         href={project.href}
-        previewSrc={previewSources[project.previewSrc] ?? project.previewSrc}
+        previewSrc={getPreviewSrc(project)}
         className={`${className} ${styles.mobileProjectCard}`}
       >
         {content(true)}
@@ -135,7 +113,7 @@ function ProjectCard({ project, index, locale, viewLabel, privateLabel, onEnter 
 function PreviewContent({ project }: { project: Project }) {
   return <>
     {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src={previewSources[project.previewSrc] ?? project.previewSrc} alt="" width={640} height={376} decoding="async" className={styles.previewImage} />
+    <img src={getPreviewSrc(project)} alt="" width={640} height={376} decoding="async" className={styles.previewImage} />
     <span className={styles.previewCaption}><span>{project.title}</span><ArrowUpRight size={15} aria-hidden="true" /></span>
   </>;
 }
@@ -192,7 +170,7 @@ export default function Projects({ locale }: { locale: Locale }) {
         if (!project.href) continue;
         const image = new Image();
         image.decoding = "async";
-        image.src = previewSources[project.previewSrc] ?? project.previewSrc;
+        image.src = getPreviewSrc(project);
         if (mobilePreview) void image.decode().catch(() => {});
       }
     }, { rootMargin: "350px 0px" });
@@ -241,11 +219,13 @@ export default function Projects({ locale }: { locale: Locale }) {
     return alliance ? [alliance, ...t.deliveryLinks.filter((project) => project !== alliance)] : t.deliveryLinks;
   }, [t.deliveryLinks]);
   const fdash = projects.find((project) => project.title === "F-Dash");
-
-  const galleryImages = React.useMemo(() => projects.filter((project) => !project.private).flatMap((project) => [
-    { src: gallerySources[project.heroSrc] ?? project.heroSrc, alt: `${project.title} website design` },
-    ...(project.detailSrc ? [{ src: gallerySources[project.detailSrc] ?? project.detailSrc, alt: `${project.title} website detail` }] : []),
-  ]), [projects]);
+  const galleryImages = React.useMemo(() => projects.flatMap((project) =>
+    project.gallerySrcs.map((src, imageIndex) => ({
+      src,
+      alt: locale === "ka"
+        ? `${project.title} პროექტის ეკრანი ${imageIndex + 1}`
+        : `${project.title} website screenshot ${imageIndex + 1}`,
+    }))).sort((a, b) => GALLERY_IMAGE_ORDER.indexOf(a.src) - GALLERY_IMAGE_ORDER.indexOf(b.src)), [projects, locale]);
   const mobileGallery = viewportWidth <= 760 || mobileLandscape;
   const mobileCurve = Math.min(46, Math.max(34, viewportWidth * 0.1));
   const mobileAxis = 65 - Math.min(2, Math.max(0, (viewportWidth - 320) * 2 / 70));
@@ -254,12 +234,9 @@ export default function Projects({ locale }: { locale: Locale }) {
     : 1.25;
   const displayedGalleryImages = React.useMemo(() => {
     if (!mobileGallery) return galleryImages;
-    const mobileImages = projects.filter((project) => !project.private).map((project) => ({
-      src: gallerySources[project.heroSrc] ?? project.heroSrc,
-      alt: `${project.title} website design`,
-    }));
-    return [...mobileImages.slice(-1), ...mobileImages.slice(0, -1)];
-  }, [galleryImages, mobileGallery, projects]);
+    if (galleryImages.length < 2) return galleryImages;
+    return [galleryImages[galleryImages.length - 1], ...galleryImages.slice(0, -1)];
+  }, [galleryImages, mobileGallery]);
 
   // Hover state does not need to reconcile the continuously animated 3D gallery.
   const gallery = React.useMemo(() => (
