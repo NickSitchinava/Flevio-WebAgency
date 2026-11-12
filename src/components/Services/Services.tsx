@@ -524,7 +524,13 @@ export default function Services({ locale }: { locale: Locale }) {
 
                   <div className={styles.serviceContent}>
                     <h3 data-service-title className={styles.serviceTitle}>
-                      {service.title}
+                      <a
+                        href={`/${locale}/services/${service.slug}`}
+                        onFocus={() => handleServiceFocus(index)}
+                        className={styles.serviceLink}
+                      >
+                        {service.title}
+                      </a>
                     </h3>
                     <p
                       data-service-description

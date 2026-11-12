@@ -67,7 +67,73 @@
   gap: 0.85rem;
   list-style: none;
   padding: 0;
-  margin: 0 0 4rem;
+  margin: 0 0 2.5rem;
+}
+
+.planning,
+.example,
+.related {
+  margin-bottom: 2.5rem;
+}
+
+.sectionHeading {
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.planningNote,
+.exampleDescription {
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.questions {
+  display: grid;
+  gap: 0.65rem;
+  padding-left: 1.35rem;
+  margin: 1rem 0 1.25rem;
+  line-height: 1.55;
+  list-style: disc;
+}
+
+.textLink {
+  color: var(--color-accent);
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.textLink:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.exampleImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.exampleTitle {
+  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.exampleDescription { margin-bottom: 0.75rem; }
+
+.related ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .featureItem {

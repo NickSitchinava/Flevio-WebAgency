@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Check } from "lucide-react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
@@ -80,17 +81,21 @@ export default async function ServiceDetailPage({
     notFound();
   }
 
+  const exampleProject = service.exampleProjectTitle
+    ? t.projects.deliveryLinks.find((project) => project.title === service.exampleProjectTitle)
+    : undefined;
+  const relatedServices = t.services.items.filter((item) => item.slug !== service.slug);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.title,
     description: service.details,
     provider: {
-      "@type": "ProfessionalService",
+      "@type": "Organization",
       name: "Flevio",
       url: `${SITE_URL}/${locale}`,
     },
-    areaServed: ["Georgia", "Worldwide"],
     url: `${SITE_URL}/${locale}/services/${slug}`,
   };
 
@@ -122,6 +127,54 @@ export default async function ServiceDetailPage({
               </li>
             ))}
           </ul>
+
+          <section className={styles.planning} aria-labelledby="service-planning-heading">
+            <h2 id="service-planning-heading" className={styles.sectionHeading}>
+              {t.serviceDetail.planningHeading}
+            </h2>
+            <p className={styles.planningNote}>{service.planningNote}</p>
+            <ul className={styles.questions}>
+              {service.planningQuestions.map((question) => <li key={question}>{question}</li>)}
+            </ul>
+            {service.slug !== "seo-optimization" && (
+              <Link href={`/${locale}#pricing`} className={styles.textLink}>
+                {t.serviceDetail.estimateLinkLabel}
+              </Link>
+            )}
+          </section>
+
+          {exampleProject?.href && exampleProject.previewSrc && (
+            <section className={styles.example} aria-labelledby="service-example-heading">
+              <h2 id="service-example-heading" className={styles.sectionHeading}>
+                {t.serviceDetail.exampleHeading}
+              </h2>
+              <Image
+                src={exampleProject.previewSrc}
+                alt={locale === "ka" ? `${exampleProject.title} ვებსაიტის გადახედვა` : `${exampleProject.title} website preview`}
+                width={640}
+                height={376}
+                className={styles.exampleImage}
+              />
+              <p className={styles.exampleTitle}>{exampleProject.title}</p>
+              <p className={styles.exampleDescription}>{exampleProject.description}</p>
+              <a href={exampleProject.href} target="_blank" rel="noopener noreferrer" className={styles.textLink}>
+                {t.serviceDetail.exampleLinkLabel}
+              </a>
+            </section>
+          )}
+
+          <nav className={styles.related} aria-label={t.serviceDetail.relatedHeading}>
+            <h2 className={styles.sectionHeading}>{t.serviceDetail.relatedHeading}</h2>
+            <ul>
+              {relatedServices.map((item) => (
+                <li key={item.slug}>
+                  <Link href={`/${locale}/services/${item.slug}`} className={styles.textLink}>
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           <div className={styles.cta}>
             <h2 className={styles.ctaHeading}>{t.serviceDetail.ctaHeading}</h2>

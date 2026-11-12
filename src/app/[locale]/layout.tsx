@@ -57,7 +57,6 @@ export async function generateMetadata({
     },
     title: t.title,
     description: t.description,
-    keywords: t.keywords,
     alternates: {
       canonical: `${SITE_URL}/${locale}`,
       languages: {
@@ -96,17 +95,10 @@ export default async function LocaleLayout({
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "Organization",
     name: "Flevio",
-    founder: { "@type": "Person", name: "Nick Sitchinava" },
     image: `${SITE_URL}/images/logo.webp`,
     url: `${SITE_URL}/${locale}`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Tbilisi",
-      addressCountry: "GE",
-    },
-    areaServed: ["Georgia", "Worldwide"],
     description: t.meta.description,
   };
 

@@ -361,6 +361,18 @@
   padding-block: 0.08em 0.12em;
 }
 
+.serviceLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.serviceLink:hover { text-decoration: underline; }
+
+.serviceLink:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
 .serviceDescription {
   max-width: 36ch;
   margin: 0.55rem 0 0;
@@ -902,14 +914,18 @@
   }
 
   .axis,
-  .stemWrap {
+  .stemWrap,
+  .topItem .stemWrap,
+  .bottomItem .stemWrap {
     display: none;
   }
 
   .timelineHeading,
   .periodLabel,
   .serviceItem,
-  .serviceContent {
+  .serviceContent,
+  .topItem .serviceContent,
+  .bottomItem .serviceContent {
     position: relative;
     inset: auto;
     width: 100%;

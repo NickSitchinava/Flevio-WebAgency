@@ -60,6 +60,9 @@ export interface ServiceItem {
   metaDescription: string;
   details: string;
   features: string[];
+  planningNote: string;
+  planningQuestions: string[];
+  exampleProjectTitle?: "Alliance Travel Georgia" | "Bike Summer Fest";
 }
 
 export interface FooterDictionary {
@@ -136,7 +139,6 @@ export interface Dictionary {
     title: string;
     description: string;
     ogDescription: string;
-    keywords: string[];
   };
    header: {
     about: string;
@@ -172,6 +174,11 @@ export interface Dictionary {
   serviceDetail: {
     backLabel: string;
     featuresHeading: string;
+    planningHeading: string;
+    exampleHeading: string;
+    exampleLinkLabel: string;
+    relatedHeading: string;
+    estimateLinkLabel: string;
     ctaHeading: string;
     ctaText: string;
     ctaButton: string;
@@ -185,25 +192,11 @@ export interface Dictionary {
 export const dictionaries: Record<Locale, Dictionary> = {
   en: {
     meta: {
-      title: "Flevio | Web Design & Development Agency in Tbilisi, Georgia",
+      title: "Custom Website Design & Development | Flevio",
       description:
-        "Flevio designs and builds custom websites, landing pages, and web applications for businesses in Tbilisi, Georgia and worldwide. Fast, SEO-friendly, built to convert.",
+        "Flevio designs and hand-codes custom websites and landing pages for service businesses. Explore project websites and estimate your website cost and timeline.",
       ogDescription:
-        "Flevio — custom websites, landing pages, and web applications, designed and built in Tbilisi, Georgia for clients worldwide.",
-      keywords: [
-        "Flevio",
-        "web design agency Tbilisi",
-        "website development Georgia",
-        "Tbilisi web developer",
-        "custom website design",
-        "landing page design services",
-        "web development agency",
-        "small business website design",
-        "web app development",
-        "responsive website design",
-        "Next.js development agency",
-        "Nick Sitchinava",
-      ],
+        "Custom websites and landing pages for service businesses. Explore Flevio's projects and website cost calculator.",
     },
      header: {
       about: "About",
@@ -252,6 +245,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "Hand-written, maintainable code",
             "Optimized for speed and SEO from day one",
           ],
+          planningNote: "The number of page templates, content source, and creative direction shape the project scope.",
+          planningQuestions: [
+            "Which pages or page templates do you need?",
+            "Will you provide the website content or need help with it?",
+            "How much custom interaction does the site need?",
+          ],
+          exampleProjectTitle: "Alliance Travel Georgia",
         },
         {
           slug: "landing-pages",
@@ -265,11 +265,18 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "Built for A/B testing",
             "Mobile-first, fast-loading design",
           ],
+          planningNote: "A landing page works around one action. Its section count and content needs determine the scope.",
+          planningQuestions: [
+            "What single action should visitors take?",
+            "How many sections do you need to explain the offer?",
+            "Will you provide the copy and images?",
+          ],
+          exampleProjectTitle: "Bike Summer Fest",
         },
         {
           slug: "seo-optimization",
           title: "SEO Optimization",
-          description: "Clean, search-friendly code structured to rank well.",
+          description: "Clean, search-friendly code that helps search engines understand your site.",
           metaDescription: "Flevio combines semantic markup, structured data, Core Web Vitals optimization, and GEO to help search and AI systems understand your site.",
           details:
             "Good SEO starts in the code, not after launch. We build every site with semantic markup, structured data, and performance baked in, so search engines and visitors both find what they need. Our optimization also includes GEO to help AI search systems understand the content.",
@@ -278,12 +285,23 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "Structured data and schema.org",
             "Core Web Vitals optimization",
           ],
+          planningNote: "The right starting point depends on the pages and technical issues you want to improve.",
+          planningQuestions: [
+            "Which pages should be reviewed first?",
+            "Is the priority page structure, structured data, or performance?",
+            "What search or visitor problem are you trying to solve?",
+          ],
         },
       ],
     },
     serviceDetail: {
       backLabel: "Back to Services",
       featuresHeading: "What's included",
+      planningHeading: "Plan the scope",
+      exampleHeading: "A related project",
+      exampleLinkLabel: "Visit project website (opens in a new tab)",
+      relatedHeading: "Explore other services",
+      estimateLinkLabel: "Estimate website cost and timeline",
       ctaHeading: "Ready to start?",
       ctaText: "Tell us about your project and we'll get back to you with next steps.",
       ctaButton: "Start a Project",
@@ -500,25 +518,11 @@ export const dictionaries: Record<Locale, Dictionary> = {
   },
   ka: {
     meta: {
-      title: "Flevio | ვებ დიზაინისა და დეველოპმენტის სააგენტო თბილისში",
+      title: "ინდივიდუალური ვებსაიტის დიზაინი და დეველოპმენტი | Flevio",
       description:
-        "Flevio ქმნის ვებსაიტებს, ლენდინგ გვერდებსა და ვებ აპლიკაციებს თბილისისა და მთელი მსოფლიოს ბიზნესებისთვის. სწრაფი, SEO-ზე მორგებული და კონვერტაციაზე ორიენტირებული გადაწყვეტილებები.",
+        "Flevio სერვის ბიზნესებისთვის ქმნის ინდივიდუალურ ვებსაიტებსა და ლენდინგ გვერდებს ხელით დაწერილი კოდით. ნახეთ პროექტები და შეაფასეთ ვებსაიტის ფასი და ვადა.",
       ogDescription:
-        "Flevio — ინდივიდუალური ვებსაიტები, ლენდინგ გვერდები და ვებ აპლიკაციები, შექმნილი თბილისში, საქართველოში, მსოფლიოს მასშტაბით მოქმედი კლიენტებისთვის.",
-      keywords: [
-        "Flevio",
-        "ვებ დიზაინი თბილისი",
-        "ვებსაიტის დამზადება საქართველო",
-        "ვებ დეველოპერი თბილისი",
-        "ინდივიდუალური ვებსაიტის დიზაინი",
-        "ლენდინგ გვერდის დამზადება",
-        "ვებ დეველოპმენტის სააგენტო",
-        "მცირე ბიზნესის ვებსაიტი",
-        "ვებ აპლიკაციის დეველოპმენტი",
-        "რესპონსივი ვებსაიტის დიზაინი",
-        "Next.js დეველოპმენტის სააგენტო",
-        "Nick Sitchinava",
-      ],
+        "ინდივიდუალური ვებსაიტები და ლენდინგ გვერდები სერვის ბიზნესებისთვის. ნახეთ Flevio-ს პროექტები და ფასის კალკულატორი.",
     },
     header: {
       about: "ჩვენ შესახებ",
@@ -567,6 +571,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "ხელით დაწერილი, ადვილად შენარჩუნებადი კოდი",
             "სისწრაფესა და SEO-ზე ორიენტირებული პირველივე დღიდან",
           ],
+          planningNote: "გვერდების შაბლონების რაოდენობა, კონტენტის წყარო და შემოქმედებითი მიმართულება განსაზღვრავს პროექტის მოცულობას.",
+          planningQuestions: [
+            "რომელი გვერდები ან გვერდების შაბლონები გჭირდებათ?",
+            "კონტენტს თავად მოგვაწვდით თუ დახმარება გჭირდებათ?",
+            "რამდენად ინდივიდუალური ინტერაქცია სჭირდება საიტს?",
+          ],
+          exampleProjectTitle: "Alliance Travel Georgia",
         },
         {
           slug: "landing-pages",
@@ -580,12 +591,19 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "მზადაა A/B ტესტირებისთვის",
             "მობილურზე მორგებული, სწრაფად ჩატვირთვადი დიზაინი",
           ],
+          planningNote: "ლენდინგ გვერდი ერთ მოქმედებაზეა ფოკუსირებული. სექციების რაოდენობა და კონტენტის საჭიროება განსაზღვრავს მის მოცულობას.",
+          planningQuestions: [
+            "რა ერთი მოქმედება უნდა შეასრულოს ვიზიტორმა?",
+            "რამდენი სექცია გჭირდებათ შეთავაზების ასახსნელად?",
+            "ტექსტსა და სურათებს თავად მოგვაწვდით?",
+          ],
+          exampleProjectTitle: "Bike Summer Fest",
         },
         {
           slug: "seo-optimization",
           title: "SEO ოპტიმიზაცია",
           description:
-            "სუფთა, საძიებო სისტემებისთვის მოსახერხებელი კოდი, სტრუქტურირებული მაღალი პოზიციებისთვის.",
+            "სუფთა, საძიებო სისტემებისთვის მოსახერხებელი კოდი, რომელიც თქვენი საიტის შინაარსის გაგებას ამარტივებს.",
           metaDescription: "Flevio აერთიანებს სემანტიკურ მარკაპს, სტრუქტურირებულ მონაცემებს, Core Web Vitals-ის ოპტიმიზაციასა და GEO-ს საიტის უკეთ გასაგებად.",
           details:
             "კარგი SEO იწყება კოდიდან და არა გაშვების შემდეგ. ჩვენ ვაგებთ თითოეულ საიტს სემანტიკური მარკაპით, სტრუქტურირებული მონაცემებით და გამართული წარმადობით, რათა საძიებო სისტემებმაც და ვიზიტორებმაც იპოვონ ის, რაც სჭირდებათ. ოპტიმიზაცია ასევე მოიცავს GEO-ს, რათა AI საძიებო სისტემებმა უკეთ გაიგონ კონტენტი.",
@@ -594,12 +612,23 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "სტრუქტურირებული მონაცემები და schema.org",
             "Core Web Vitals-ის ოპტიმიზაცია",
           ],
+          planningNote: "საწყისი ნაბიჯი დამოკიდებულია იმ გვერდებსა და ტექნიკურ საკითხებზე, რომელთა გაუმჯობესებაც გსურთ.",
+          planningQuestions: [
+            "რომელი გვერდები უნდა შევამოწმოთ პირველ რიგში?",
+            "პრიორიტეტია გვერდის სტრუქტურა, სტრუქტურირებული მონაცემები თუ წარმადობა?",
+            "რომელი საძიებო ან ვიზიტორის პრობლემა გსურთ გადაჭრათ?",
+          ],
         },
       ],
     },
     serviceDetail: {
       backLabel: "სერვისებზე დაბრუნება",
       featuresHeading: "რას მოიცავს",
+      planningHeading: "განსაზღვრეთ მოცულობა",
+      exampleHeading: "მსგავსი პროექტი",
+      exampleLinkLabel: "პროექტის საიტის ნახვა (იხსნება ახალ ჩანართში)",
+      relatedHeading: "სხვა სერვისები",
+      estimateLinkLabel: "შეაფასეთ ვებსაიტის ფასი და ვადა",
       ctaHeading: "მზად ხართ დასაწყებად?",
       ctaText: "მოგვიყევით თქვენი პროექტის შესახებ და დაგიკავშირდებით შემდეგი ნაბიჯებისთვის.",
       ctaButton: "დაიწყეთ პროექტი",
