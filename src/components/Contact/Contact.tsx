@@ -115,6 +115,7 @@ export default function Contact({ locale }: { locale: Locale }) {
                 <ArrowUpRight className={styles.actionArrow} size={18} strokeWidth={1.8} aria-hidden="true" />
               </Button>
             </div>
+            <p className={styles.location} lang={locale}>{t.location}</p>
           </div>
         </div>
 

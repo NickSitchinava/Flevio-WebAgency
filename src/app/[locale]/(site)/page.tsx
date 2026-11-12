@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero/Hero";
 import TechStack from "@/components/TechStack/TechStack";
@@ -8,6 +9,8 @@ import PricingCalculator from "@/components/PricingCalculator/PricingCalculator"
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
 import { locales, defaultLocale, type Locale } from "@/i18n/config";
+import { dictionaries } from "@/i18n/dictionaries";
+import { SITE_URL, SOCIAL_IMAGE_URL } from "@/lib/site-url";
 
 function resolveLocale(value: string): Locale {
   return locales.includes(value as Locale) ? (value as Locale) : defaultLocale;
@@ -15,6 +18,39 @@ function resolveLocale(value: string): Locale {
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale = resolveLocale(rawLocale);
+  const t = dictionaries[locale].meta;
+
+  return {
+    title: t.title,
+    description: t.description,
+    alternates: {
+      canonical: `${SITE_URL}/${locale}`,
+      languages: {
+        en: `${SITE_URL}/en`,
+        ka: `${SITE_URL}/ka`,
+        "x-default": `${SITE_URL}/en`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: `${SITE_URL}/${locale}`,
+      title: t.title,
+      description: t.ogDescription,
+      locale: locale === "ka" ? "ka_GE" : "en_US",
+      images: [{ url: SOCIAL_IMAGE_URL, width: 1916, height: 1075, alt: "Flevio website homepage preview" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t.title,
+      description: t.ogDescription,
+      images: [SOCIAL_IMAGE_URL],
+    },
+  };
 }
 
 export default async function Home({

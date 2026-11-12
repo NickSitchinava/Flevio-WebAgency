@@ -7,7 +7,7 @@ import Footer from "@/components/Footer/Footer";
 import { Button } from "@/components/ui/Button/Button";
 import { locales, defaultLocale, type Locale } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
-import { SITE_URL } from "@/lib/site-url";
+import { ORGANIZATION_ID, SITE_URL, SOCIAL_IMAGE_URL } from "@/lib/site-url";
 import styles from "./service-detail.module.css";
 
 function resolveLocale(value: string): Locale {
@@ -33,7 +33,14 @@ export async function generateMetadata({
   const service = dictionaries[locale].services.items.find((item) => item.slug === slug);
 
   if (!service) {
-    return {};
+    return {
+      title: "404 — Page Not Found | Flevio",
+      description: "The page you're looking for isn't available. Return to Flevio's homepage.",
+      robots: { index: false },
+      alternates: { canonical: null },
+      openGraph: null,
+      twitter: null,
+    };
   }
 
   const canonicalUrl = `${SITE_URL}/${locale}/services/${slug}`;
@@ -56,13 +63,13 @@ export async function generateMetadata({
       title: `${service.title} | Flevio`,
       description: service.metaDescription,
       locale: locale === "ka" ? "ka_GE" : "en_US",
-      images: [{ url: `${SITE_URL}/images/logo.webp`, width: 1024, height: 1024, alt: "Flevio" }],
+      images: [{ url: SOCIAL_IMAGE_URL, width: 1916, height: 1075, alt: "Flevio website homepage preview" }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: `${service.title} | Flevio`,
       description: service.metaDescription,
-      images: [`${SITE_URL}/images/logo.webp`],
+      images: [SOCIAL_IMAGE_URL],
     },
   };
 }
@@ -92,9 +99,7 @@ export default async function ServiceDetailPage({
     name: service.title,
     description: service.details,
     provider: {
-      "@type": "Organization",
-      name: "Flevio",
-      url: `${SITE_URL}/${locale}`,
+      "@id": ORGANIZATION_ID,
     },
     url: `${SITE_URL}/${locale}/services/${slug}`,
   };
@@ -150,7 +155,7 @@ export default async function ServiceDetailPage({
               </h2>
               <Image
                 src={exampleProject.previewSrc}
-                alt={locale === "ka" ? `${exampleProject.title} ვებსაიტის გადახედვა` : `${exampleProject.title} website preview`}
+                alt={exampleProject.previewAlt ?? exampleProject.title}
                 width={640}
                 height={376}
                 className={styles.exampleImage}

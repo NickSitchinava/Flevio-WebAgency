@@ -80,6 +80,8 @@ export interface FooterDictionary {
   legal: {
     privacy: string;
     terms: string;
+    cookies: string;
+    cookieSettings: string;
   };
   crafted: string;
   rights: string;
@@ -95,6 +97,7 @@ export interface ContactChannel {
 export interface ContactDictionary {
   heading: string;
   text: string;
+  location: string;
   whatsappAction: string;
   trust: { brief: string; reply: string };
   process: { label: string; stages: [string, string, string] };
@@ -112,6 +115,7 @@ export interface ProjectsDeliveryLink {
   duration?: string;
   href?: string;
   previewSrc?: string;
+  previewAlt?: string;
   gallerySrcs: string[];
   private?: boolean;
 }
@@ -331,6 +335,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "1–2 weeks",
           href: "https://nick-sitchinava-portfolio.vercel.app/",
           previewSrc: "/images/previews/nick-portfolio-home.webp",
+          previewAlt: "Nick Sitchinava portfolio homepage with a black-and-white portrait and bold name typography",
           gallerySrcs: [
             "/images/gallery/nick-creative.webp",
             "/images/gallery/nick-home.webp",
@@ -345,6 +350,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "2–3 weeks",
           href: "https://georgesitchinava.vercel.app/",
           previewSrc: "/images/previews/george-portfolio.webp",
+          previewAlt: "George Sitchinava portfolio homepage with a floating Georgian monastery and large Georgia headline",
           gallerySrcs: [
             "/images/gallery/george-home.webp",
             "/images/gallery/george-gallery.webp",
@@ -358,6 +364,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "1–2 weeks",
           href: "https://summerfest2.vercel.app/",
           previewSrc: "/images/previews/bike-summer-fest.webp",
+          previewAlt: "Bike Summer Fest landing page with a motorcycle emblem and bold event lettering",
           gallerySrcs: ["/images/gallery/bike-home.webp"],
         },
         {
@@ -374,6 +381,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           region: "Georgia",
           href: "https://www.alliancetravelgeorgia.com/",
           previewSrc: "/images/previews/alliance-travel-georgia.webp",
+          previewAlt: "Alliance Travel Georgia homepage with mountain scenery and a large Georgia headline",
           gallerySrcs: [
             "/images/gallery/alliance-home.webp",
             "/images/gallery/alliance-gallery.webp",
@@ -467,6 +475,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     contact: {
       heading: "Your website\nstarts here.",
       text: "A rough idea is enough, even if you're only exploring. Tell us what you have in mind and we'll shape the next step together.",
+      location: "Based in Tbilisi, Georgia",
       whatsappAction: "Start on WhatsApp",
       trust: { brief: "No finished brief needed", reply: "Replies within minutes" },
       process: { label: "After you reach out", stages: ["Share an idea", "We understand it", "Conversation begins"] },
@@ -510,6 +519,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       legal: {
         privacy: "Privacy Policy",
         terms: "Terms of Service",
+        cookies: "Cookie Policy",
+        cookieSettings: "Cookie Settings",
       },
       crafted: "Crafted with",
       rights: "All rights reserved.",
@@ -658,6 +669,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "1–2 კვირა",
           href: "https://nick-sitchinava-portfolio.vercel.app/",
           previewSrc: "/images/previews/nick-portfolio-home.webp",
+          previewAlt: "ნიკ სიჭინავას პორტფოლიოს მთავარი გვერდი შავ-თეთრი პორტრეტითა და დიდი სახელით",
           gallerySrcs: [
             "/images/gallery/nick-creative.webp",
             "/images/gallery/nick-home.webp",
@@ -672,6 +684,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "2–3 კვირა",
           href: "https://georgesitchinava.vercel.app/",
           previewSrc: "/images/previews/george-portfolio.webp",
+          previewAlt: "გიორგი სიჭინავას პორტფოლიოს მთავარი გვერდი ქართული ტაძრის ილუსტრაციითა და დიდი წარწერით „GEORGIA“",
           gallerySrcs: [
             "/images/gallery/george-home.webp",
             "/images/gallery/george-gallery.webp",
@@ -685,6 +698,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           duration: "1–2 კვირა",
           href: "https://summerfest2.vercel.app/",
           previewSrc: "/images/previews/bike-summer-fest.webp",
+          previewAlt: "Bike Summer Fest-ის ლენდინგ გვერდი მოტოციკლის ემბლემითა და დიდი სათაურით",
           gallerySrcs: ["/images/gallery/bike-home.webp"],
         },
         {
@@ -701,6 +715,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
           region: "საქართველო",
           href: "https://www.alliancetravelgeorgia.com/",
           previewSrc: "/images/previews/alliance-travel-georgia.webp",
+          previewAlt: "Alliance Travel Georgia-ს მთავარი გვერდი მთების ხედითა და დიდი წარწერით „Georgia“",
           gallerySrcs: [
             "/images/gallery/alliance-home.webp",
             "/images/gallery/alliance-gallery.webp",
@@ -794,6 +809,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
     contact: {
       heading: "თქვენი ვებსაიტი\nაქ იწყება.",
       text: "საწყისი იდეაც საკმარისია, მაშინაც კი, თუ ჯერ მხოლოდ ვარიანტებს განიხილავთ. მოგვწერეთ და ერთად განვსაზღვროთ შემდეგი ნაბიჯი.",
+      location: "მდებარეობს თბილისში, საქართველოში",
       whatsappAction: "დავიწყოთ WhatsApp-ზე",
       trust: { brief: "მზა ბრიფი საჭირო არ არის", reply: "გიპასუხებთ რამდენიმე წუთში" },
       process: { label: "მოწერის შემდეგ", stages: ["გაგვიზიარეთ იდეა", "გავერკვევით დეტალებში", "საუბარს დავიწყებთ"] },
@@ -837,6 +853,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       legal: {
         privacy: "კონფიდენციალურობის პოლიტიკა",
         terms: "მომსახურების პირობები",
+        cookies: "ქუქი-ფაილების პოლიტიკა",
+        cookieSettings: "ქუქი-ფაილების პარამეტრები",
       },
       crafted: "შექმნილია",
       rights: "ყველა უფლება დაცულია.",

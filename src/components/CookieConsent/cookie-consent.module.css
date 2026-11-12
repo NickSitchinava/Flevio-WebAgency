@@ -1,0 +1,84 @@
+.banner {
+  position: fixed;
+  z-index: 1100;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  left: max(1.25rem, env(safe-area-inset-left));
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  border: 1px solid rgb(21 20 18 / 18%);
+  border-radius: 16px;
+  background: #efede6;
+  box-shadow: 0 18px 60px rgb(21 20 18 / 25%);
+  color: #151412;
+  font-family: var(--font-body);
+}
+
+.bannerCopy { max-width: 50ch; }
+.bannerTitle { margin-bottom: 0.65rem; font: 700 clamp(1.4rem, 2vw, 2rem)/1.1 var(--font-hero-display), Arial, sans-serif; letter-spacing: -0.025em; }
+.bannerCopy p, .dialogDescription { font-size: 0.95rem; line-height: 1.5; }
+.policyLinks { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; margin-top: 1rem; }
+.policyLinks a { font-size: 0.8rem; font-weight: 700; text-decoration: underline; text-underline-offset: 0.25em; }
+.policyLinks a:hover { color: #cd0000; }
+.bannerActions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; min-width: min(100%, 320px); }
+.bannerActions button, .save { min-height: 46px; padding: 0.7rem 1.2rem; border-radius: 999px; font: 700 0.85rem/1.2 var(--font-body); transition: background 180ms ease, color 180ms ease; }
+.accept { background: #cd0000; color: #efede6; }
+.decline { background: #151412; color: #efede6; }
+.accept:hover { background: #a80000; }
+.decline:hover { background: #3a3834; }
+.bannerActions .customize { grid-column: 1 / -1; min-height: 38px; border: 1px solid rgb(21 20 18 / 40%); background: transparent; color: #151412; }
+.customize:hover { background: rgb(21 20 18 / 7%); }
+.banner button:focus-visible, .dialog button:focus-visible, .dialog input:focus-visible, .policyLinks a:focus-visible { outline: 3px solid #cd0000; outline-offset: 3px; }
+
+.overlay { position: fixed; z-index: 1200; inset: 0; background: rgb(21 20 18 / 65%); }
+.dialog {
+  position: fixed;
+  z-index: 1201;
+  top: 50%;
+  left: 50%;
+  width: min(calc(100vw - 2rem), 560px);
+  max-height: min(calc(100dvh - 2rem), 740px);
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: 16px;
+  background: #efede6;
+  box-shadow: 0 20px 70px rgb(0 0 0 / 30%);
+  color: #151412;
+  font-family: var(--font-body);
+}
+.dialogTitle { margin: 0 2.5rem 0.8rem 0; font: 700 clamp(1.7rem, 3vw, 2.5rem)/1.1 var(--font-hero-display), Arial, sans-serif; letter-spacing: -0.03em; }
+.dialogDescription { margin-bottom: 1.5rem; max-width: 55ch; }
+.preferenceRow { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding-block: 1.15rem; border-top: 1px solid rgb(21 20 18 / 18%); }
+.preferenceRow strong { display: block; margin-bottom: 0.35rem; font-size: 0.95rem; }
+.preferenceRow p, .preferenceDescription { display: block; color: #514e49; font-size: 0.84rem; line-height: 1.45; }
+.alwaysOn { flex: 0 0 auto; color: #514e49; font-size: 0.76rem; font-weight: 700; }
+.preferenceRow input { flex: 0 0 auto; width: 1.35rem; height: 1.35rem; accent-color: #cd0000; cursor: pointer; }
+.dialogFooter { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 1rem; padding-top: 1.4rem; border-top: 1px solid rgb(21 20 18 / 18%); }
+.dialogFooter .policyLinks { margin-top: 0; }
+.save { background: #cd0000; color: #efede6; }
+.save:hover { background: #a80000; }
+.close { position: absolute; top: 1.25rem; right: 1.25rem; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; color: #151412; }
+.close:hover { background: rgb(21 20 18 / 8%); }
+
+@media (max-width: 700px) {
+  .banner { align-items: stretch; flex-direction: column; gap: 1.25rem; padding: 1.25rem; }
+  .bannerActions { min-width: 0; }
+  .bannerCopy p { font-size: 0.88rem; }
+  .dialogFooter { align-items: stretch; }
+  .save { width: 100%; }
+}
+
+@media (max-width: 380px) {
+  .banner { right: 0.75rem; bottom: max(0.75rem, env(safe-area-inset-bottom)); left: 0.75rem; }
+  .bannerActions button { padding-inline: 0.65rem; font-size: 0.78rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bannerActions button, .save { transition: none; }
+}

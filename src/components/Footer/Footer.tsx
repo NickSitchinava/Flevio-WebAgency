@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { dictionaries } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
+import { useCookieConsent } from "@/components/CookieConsent/CookieConsent";
 import styles from "./footer.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -119,6 +120,7 @@ export default function Footer({ locale }: { locale: Locale }) {
   const [inView, setInView] = useState(false);
   const year = new Date().getFullYear();
   const t = dictionaries[locale].footer;
+  const cookieConsent = useCookieConsent();
 
   React.useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -323,6 +325,19 @@ export default function Footer({ locale }: { locale: Locale }) {
                 >
                   {t.legal.terms}
                 </MagneticPill>
+                <MagneticPill
+                  href={`/${locale}/legal/cookies`}
+                  className={`${styles.pill} ${styles.pillSecondary}`}
+                  enabled={magneticEnabled}
+                >
+                  {t.legal.cookies}
+                </MagneticPill>
+                {cookieConsent.enabled && (
+                  <button type="button" className={`${styles.pill} ${styles.pillSecondary}`}
+                    onClick={cookieConsent.openSettings}>
+                    {t.legal.cookieSettings}
+                  </button>
+                )}
               </div>
             </div>
           </div>

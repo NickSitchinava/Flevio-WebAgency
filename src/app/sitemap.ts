@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  const legalEntries: MetadataRoute.Sitemap = (["privacy", "terms"] as const).flatMap((document) =>
+  const legalEntries: MetadataRoute.Sitemap = (["privacy", "terms", "cookies"] as const).flatMap((document) =>
     locales.map((locale) => ({
       url: `${SITE_URL}/${locale}/legal/${document}`,
       alternates: {

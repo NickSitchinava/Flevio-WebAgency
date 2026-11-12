@@ -16,6 +16,12 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Google Analytics 4
+
+Analytics is disabled unless `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set to a valid `G-…` web-stream ID at build time. When configured, visitors see the consent panel; the Google tag does not load until they accept analytics.
+
+Before enabling the ID in production, set the GA4 property's user and event data retention to **2 months**. In the web data stream's Enhanced Measurement settings, enable page views for page loads and browser history changes. The site relies on those settings for client-side navigation and does not send manual page-view events. Verify one page view per navigation in GA4 DebugView with a real measurement ID.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

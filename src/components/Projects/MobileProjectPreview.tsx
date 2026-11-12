@@ -89,7 +89,7 @@ export function MobileProjectPreview({
                 >
                   <div className={styles.mobilePreviewVisual}>
                     {/* eslint-disable-next-line @next/next/no-img-element -- Local, sized project preview asset. */}
-                    <img src={previewSrc} alt={locale === "ka" ? `${project.title} ვებსაიტის გადახედვა` : `${project.title} website preview`} width={640} height={376} decoding="async" />
+                    <img src={previewSrc} alt={project.previewAlt ?? project.title} width={640} height={376} decoding="async" />
                     <Dialog.Close asChild>
                       <button type="button" className={styles.mobilePreviewClose} aria-label={closeLabel}>
                         <X size={20} aria-hidden="true" />

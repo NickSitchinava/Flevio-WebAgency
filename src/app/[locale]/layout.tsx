@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Inter, Playfair_Display, Poppins, Roboto } from "next/font/google";
-import { ArcRevealHero } from "@/components/ArcRevealHero/ArcRevealHero";
 import { locales, defaultLocale, type Locale } from "@/i18n/config";
-import { dictionaries } from "@/i18n/dictionaries";
 import { SITE_URL } from "@/lib/site-url";
-import SmoothScroll from "@/components/SmoothScroll/SmoothScroll";
 import "../globals.css";
 
 const inter = Inter({
@@ -41,44 +39,28 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale = resolveLocale(rawLocale);
-  const t = dictionaries[locale].meta;
-
+  if (!locales.includes(rawLocale as Locale)) {
+    return {
+      title: "404 — Page Not Found | Flevio",
+      description: "The page you're looking for isn't available. Return to Flevio's homepage.",
+      robots: { index: false },
+    };
+  }
   return {
     metadataBase: new URL(SITE_URL),
     icons: {
       icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
     },
-    title: t.title,
-    description: t.description,
-    alternates: {
-      canonical: `${SITE_URL}/${locale}`,
-      languages: {
-        en: `${SITE_URL}/en`,
-        ka: `${SITE_URL}/ka`,
-        "x-default": `${SITE_URL}/en`,
-      },
-    },
-    openGraph: {
-      type: "website",
-      url: `${SITE_URL}/${locale}`,
-      title: t.title,
-      description: t.ogDescription,
-      locale: locale === "ka" ? "ka_GE" : "en_US",
-      images: [{ url: `${SITE_URL}/images/logo.webp`, width: 1024, height: 1024, alt: "Flevio" }],
-    },
-    twitter: {
-      card: "summary",
-      title: t.title,
-      description: t.ogDescription,
-      images: [`${SITE_URL}/images/logo.webp`],
-    },
+    title: "404 — Page Not Found | Flevio",
+    description: "The page you're looking for isn't available. Return to Flevio's homepage.",
   };
 }
 
@@ -90,33 +72,15 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: rawLocale } = await params;
+  if (!locales.includes(rawLocale as Locale)) notFound();
   const locale = resolveLocale(rawLocale);
-  const t = dictionaries[locale];
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Flevio",
-    image: `${SITE_URL}/images/logo.webp`,
-    url: `${SITE_URL}/${locale}`,
-    description: t.meta.description,
-  };
 
   return (
     <html
       lang={locale}
       className={`${inter.variable} ${playfair.variable} ${poppins.variable} ${roboto.variable}`}
     >
-      <body>
-        <SmoothScroll />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <ArcRevealHero locale={locale}>
-          {children}
-        </ArcRevealHero>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
