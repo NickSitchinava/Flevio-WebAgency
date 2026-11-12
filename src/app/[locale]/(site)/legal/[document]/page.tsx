@@ -137,7 +137,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title: `${title} | Flevio`,
       description,
       locale: locale === "ka" ? "ka_GE" : "en_US",
-      images: [{ url: SOCIAL_IMAGE_URL, width: 1916, height: 1075, alt: "Flevio website homepage preview" }],
+      images: [{ url: SOCIAL_IMAGE_URL, width: 1672, height: 941, alt: locale === "ka" ? "Flevio-ს ლოგო და ვებდიზაინისა და დეველოპმენტის წარწერა ლეპტოპის გვერდით" : "Flevio web design and development brand beside a laptop showing a website" }],
     },
     twitter: {
       card: "summary_large_image",
